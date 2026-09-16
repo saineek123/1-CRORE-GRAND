@@ -528,6 +528,39 @@ body:after{width:220px;height:220px;right:-110px;top:520px;background:rgba(113,5
 }
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
 
+
+/* ===== WINNER + SHARE MILESTONE ===== */
+.winner-card{display:flex;align-items:center;gap:18px;background:linear-gradient(135deg,#fff,#f4f7ff)}
+.winner-icon{width:62px;height:62px;min-width:62px;border-radius:20px;display:grid;place-items:center;font-size:30px;background:linear-gradient(135deg,#fff5c2,#ffd95c);box-shadow:0 10px 28px rgba(255,193,7,.2);animation:prizeGlow 2.2s ease-in-out infinite}
+.winner-kicker{font-size:11px;font-weight:800;letter-spacing:1.2px;color:#155eef;margin-bottom:5px}.winner-card h2{margin:0 0 6px;font-size:19px;color:#172b4d}.winner-card p{margin:0;color:#667085;line-height:1.5;font-size:14px}.winner-result{margin-top:12px;display:flex;flex-direction:column;gap:3px;padding:11px 13px;border-radius:14px;background:#f8fafc;border:1px solid #e5e7eb}.winner-result strong{font-size:16px;color:#101828}.winner-result span,.winner-result small{color:#667085}
+.share-reward-box{margin:16px 0;padding:14px;border-radius:17px;background:linear-gradient(135deg,#eef4ff,#f8f5ff);display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid rgba(21,94,239,.08)}.reward-label{display:block;font-size:10px;font-weight:800;letter-spacing:1px;color:#155eef;margin-bottom:4px}.share-reward-box strong{display:block;font-size:14px;color:#172b4d}.share-reward-box small{display:block;margin-top:4px;color:#667085;line-height:1.4}.reward-badge{width:44px;height:44px;min-width:44px;border-radius:14px;display:grid;place-items:center;background:#155eef;color:#fff;font-weight:800;box-shadow:0 8px 20px rgba(21,94,239,.22)}
+@media(max-width:650px){.winner-card{align-items:flex-start}.winner-icon{width:52px;height:52px;min-width:52px;font-size:25px}.share-reward-box{align-items:flex-start}}
+
+
+.referral-thar-box{position:relative;border:1px solid rgba(245,158,11,.22);background:linear-gradient(135deg,#fff9e8 0%,#eef6ff 55%,#f8f2ff 100%);box-shadow:0 12px 35px rgba(245,158,11,.10);overflow:hidden}.referral-thar-box:after{content:"";position:absolute;inset:-60%;background:linear-gradient(120deg,transparent 42%,rgba(255,255,255,.65) 50%,transparent 58%);animation:tharShine 4s linear infinite;pointer-events:none}.referral-thar-box>*{position:relative;z-index:1}.referral-thar-box .reward-badge{background:linear-gradient(135deg,#f59e0b,#ef4444);box-shadow:0 8px 24px rgba(239,68,68,.25)}@keyframes tharShine{to{transform:translateX(35%) translateY(35%) rotate(8deg)}}
+
+/* ===== IMPORTANT REFERRAL POPUP ===== */
+.important-referral-overlay{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(7,18,48,.72);backdrop-filter:blur(8px);animation:importantFade .3s ease}
+.important-referral-card{width:min(470px,100%);position:relative;background:linear-gradient(145deg,#fff,#f5f8ff);border:1px solid rgba(255,255,255,.8);border-radius:28px;padding:25px 20px 22px;text-align:center;box-shadow:0 30px 90px rgba(0,0,0,.35);animation:importantPop .45s cubic-bezier(.2,.85,.2,1);overflow:hidden}
+.important-referral-card:before{content:"";position:absolute;width:180px;height:180px;left:-90px;top:-90px;background:rgba(245,158,11,.16);border-radius:50%;filter:blur(5px);animation:importantFloat 4s ease-in-out infinite}
+.important-referral-card:after{content:"";position:absolute;right:-90px;bottom:-90px;width:180px;height:180px;background:rgba(21,94,239,.12);border-radius:50%;filter:blur(5px);animation:importantFloat 5s ease-in-out infinite reverse}
+.important-referral-card>*{position:relative;z-index:2}
+.important-referral-close{position:absolute;right:12px;top:10px;z-index:5;width:34px;height:34px;border:0;border-radius:50%;background:#eef2f8;color:#26364d;font-size:25px;line-height:1;cursor:pointer;transition:.2s}
+.important-referral-close:hover{transform:rotate(90deg) scale(1.08);background:#e2e8f0}
+.important-referral-badge{display:inline-block;padding:7px 12px;border-radius:999px;background:#fff3cd;color:#9a6700;font-size:11px;font-weight:900;letter-spacing:.5px;animation:importantPulse 2s ease-in-out infinite}
+.important-referral-icon{font-size:50px;margin:8px 0 0;animation:importantGift 2.2s ease-in-out infinite}
+.important-referral-card h2{margin:4px 0 8px;font-size:27px;line-height:1.15;color:#14213d}
+.important-referral-main{margin:0 auto 14px;max-width:390px;color:#526176;font-size:14px;line-height:1.55}
+.important-referral-reward{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.important-referral-reward div{padding:13px 9px;border-radius:17px;background:linear-gradient(135deg,#fff8df,#fff);border:1px solid rgba(245,158,11,.25);box-shadow:0 8px 22px rgba(31,45,75,.07);font-size:13px;color:#27364e}
+.important-referral-reward div:nth-child(2){background:linear-gradient(135deg,#edf5ff,#fff);border-color:rgba(21,94,239,.16)}
+.important-referral-reward b,.important-referral-reward span{display:block}.important-referral-reward span{margin-top:4px;color:#e08a00;font-size:12px;font-weight:900}.important-referral-reward div:nth-child(2) span{color:#155eef}
+.important-referral-note{font-size:11px;line-height:1.5;color:#748196;margin:10px 4px 15px}
+.important-referral-btn{width:100%;border:0;border-radius:15px;padding:14px 16px;background:linear-gradient(135deg,#155eef,#7138ff);color:#fff;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 10px 28px rgba(21,94,239,.28);transition:.2s}
+.important-referral-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(21,94,239,.36)}
+@keyframes importantFade{from{opacity:0}to{opacity:1}}@keyframes importantPop{from{opacity:0;transform:translateY(25px) scale(.9)}to{opacity:1;transform:none}}@keyframes importantGift{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-7px) rotate(-4deg)}}@keyframes importantPulse{0%,100%{box-shadow:0 0 0 0 rgba(245,158,11,.15)}50%{box-shadow:0 0 0 7px rgba(245,158,11,0)}}@keyframes importantFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,15px)}}
+@media(max-width:520px){.important-referral-card{padding:23px 15px 18px;border-radius:24px}.important-referral-card h2{font-size:24px}.important-referral-reward{gap:7px}.important-referral-reward div{padding:11px 6px;font-size:12px}}
+
 </style>
 </head>
 
@@ -628,6 +661,21 @@ body:after{width:220px;height:220px;right:-110px;top:520px;background:rgba(113,5
 
 
 
+    <!-- WINNER STATUS -->
+    <section class="card winner-card" id="winnerSection">
+        <div class="winner-icon">🏆</div>
+        <div>
+            <div class="winner-kicker">WINNER STATUS</div>
+            <h2 id="winnerTitle">Winner will be declared after campaign closes</h2>
+            <p id="winnerMessage">The final winner will be announced after the campaign is closed and eligible participation is verified.</p>
+            <div class="winner-result" id="winnerResult" style="display:none">
+                <strong id="winnerName">—</strong>
+                <span id="winnerParticipant">—</span>
+                <small id="winnerDate">—</small>
+            </div>
+        </div>
+    </section>
+
     <!-- USER DASHBOARD -->
 
     <section
@@ -679,6 +727,15 @@ body:after{width:220px;height:220px;right:-110px;top:520px;background:rgba(113,5
 
         </div>
 
+
+        <div class="share-reward-box referral-thar-box">
+            <div>
+                <span class="reward-label">🚀 REFERRAL REWARD</span>
+                <strong id="shareRewardTitle">Share more • Unlock Mahindra Thar reward</strong>
+                <small id="shareRewardText">सबसे ज्यादा genuine & verified referrals करने वाले eligible participant को Mahindra Thar gift दिया जाएगा. अगर आपके referral से campaign winner बनता है, तो आपको भी Mahindra Thar gift मिलेगा.</small>
+            </div>
+            <div class="reward-badge" id="shareRewardBadge">0</div>
+        </div>
 
         <button
             class="btn primary"
@@ -798,7 +855,9 @@ body:after{width:220px;height:220px;right:-110px;top:520px;background:rgba(113,5
         </h2>
 
         <p style="color:#667085;line-height:1.5">
-            Share the campaign and help it reach more people.
+            👥 अपने दोस्तों और family को genuine referral के साथ join कराएं.<br>
+            🏆 सबसे ज्यादा genuine & verified referrals करने वाले eligible participant के लिए Mahindra Thar gift reward रखा गया है.<br>
+            🎁 और अगर आपके referral से कोई campaign winner बनता है, तो winner के referrer को भी Mahindra Thar gift दिया जाएगा.
         </p>
 
         <div class="share-buttons">
@@ -851,6 +910,12 @@ body:after{width:220px;height:220px;right:-110px;top:520px;background:rgba(113,5
             <p>
                 • Any promotional prize or reward is subject
                 to applicable law and the final published Terms & Conditions.
+            </p>
+
+            <p>
+                • Mahindra Thar referral rewards are subject to genuine/verified
+                referrals, eligibility, campaign verification and the published
+                reward terms. No reward is guaranteed merely for pressing Share.
             </p>
 
         </div>
@@ -1117,7 +1182,13 @@ let campaign = {
 
     startDate:"",
 
-    endDate:""
+    endDate:"",
+    winnerStatus:"pending",
+    winnerName:"",
+    winnerParticipantId:"",
+    winnerDeclaredAt:"",
+    shareRewardThreshold:10,
+    shareRewardText:"सबसे ज्यादा genuine & verified referrals करने वाले eligible participant को Mahindra Thar gift दिया जाएगा. अगर आपके referral से campaign winner बनता है, तो आपको भी Mahindra Thar gift मिलेगा."
 
 };
 
@@ -1216,8 +1287,48 @@ function updateCampaignUI(){
 
     }
 
+    updateWinnerUI();
+
 }
 
+
+
+function updateWinnerUI(){
+    const title=document.getElementById("winnerTitle"), msg=document.getElementById("winnerMessage"), result=document.getElementById("winnerResult");
+    if(!title||!msg||!result) return;
+    const status=String(campaign.winnerStatus||"pending").toLowerCase();
+    if(status==="declared" && campaign.winnerName){
+        title.textContent="🏆 Winner Declared";
+        msg.textContent="The campaign winner has been officially declared.";
+        result.style.display="flex";
+        document.getElementById("winnerName").textContent=campaign.winnerName;
+        document.getElementById("winnerParticipant").textContent=campaign.winnerParticipantId?"Participant ID: "+campaign.winnerParticipantId:"";
+        document.getElementById("winnerDate").textContent=campaign.winnerDeclaredAt?"Declared: "+new Date(campaign.winnerDeclaredAt).toLocaleString("en-IN"):"";
+    }else if(status==="closed"){
+        title.textContent="🔎 Winner Verification in Progress";
+        msg.textContent="The campaign is closed. The winner will be announced after eligibility and participation verification.";
+        result.style.display="none";
+    }else{
+        title.textContent="🏆 Winner will be declared after campaign closes";
+        msg.textContent="The final winner will be announced after the campaign is closed and eligible participation is verified.";
+        result.style.display="none";
+    }
+}
+
+function updateShareRewardUI(shareCount){
+    const count=Number(shareCount||0), threshold=Math.max(1,Number(campaign.shareRewardThreshold||10));
+    const title=document.getElementById("shareRewardTitle"), text=document.getElementById("shareRewardText"), badge=document.getElementById("shareRewardBadge");
+    if(!title||!text||!badge) return;
+    badge.textContent=count;
+    const remaining=Math.max(0,threshold-count);
+    if(count>=threshold){
+        title.textContent="🔥 Referral Reward • Mahindra Thar";
+        text.textContent=campaign.shareRewardText||"Mahindra Thar reward eligibility is subject to genuine/verified referrals and the published campaign terms.";
+    }else{
+        title.textContent="🚀 "+count+" genuine referral"+(count===1?"":"s")+" recorded";
+        text.textContent=campaign.shareRewardText||"Mahindra Thar reward eligibility is subject to genuine/verified referrals and the published campaign terms.";
+    }
+}
 
 
 /* =========================
@@ -1607,10 +1718,9 @@ async function loadUser(user){
         data.participantId || "—";
 
 
-    document
-    .getElementById("shareCount")
-    .textContent =
-        Number(data.shareCount || 0);
+    const currentShareCount = Number(data.shareCount || 0);
+    document.getElementById("shareCount").textContent = currentShareCount;
+    updateShareRewardUI(currentShareCount);
 
 
     if(data.joinedAt){
@@ -1664,6 +1774,11 @@ async function(){
                     increment(1)
             }
         );
+
+        const shareSnapshot = await get(ref(db,"users/"+user.uid+"/shareCount"));
+        const newShareCount = shareSnapshot.exists() ? Number(shareSnapshot.val() || 0) : 0;
+        document.getElementById("shareCount").textContent = newShareCount;
+        updateShareRewardUI(newShareCount);
 
     }
 
@@ -2024,7 +2139,41 @@ const revealObserver = new IntersectionObserver(entries=>{
 },{threshold:.08});
 revealCards.forEach(el=>revealObserver.observe(el));
 
+
+/* IMPORTANT REFERRAL POPUP — shows on every page load */
+function closeImportantReferral(){
+  const popup=document.getElementById("importantReferralPopup");
+  if(popup) popup.style.display="none";
+  document.body.classList.remove("referral-popup-open");
+}
+window.addEventListener("load",()=>{
+  const popup=document.getElementById("importantReferralPopup");
+  if(popup){
+    popup.style.display="flex";
+    document.body.classList.add("referral-popup-open");
+  }
+});
+
 </script>
+
+
+
+<!-- IMPORTANT REFERRAL POPUP -->
+<div id="importantReferralPopup" class="important-referral-overlay">
+  <div class="important-referral-card">
+    <button class="important-referral-close" onclick="closeImportantReferral()" aria-label="Close">&times;</button>
+    <div class="important-referral-badge">⚠️ IMPORTANT • REFERRAL REWARD</div>
+    <div class="important-referral-icon">🎁</div>
+    <h2>Mahindra Thar जीतने का मौका!</h2>
+    <p class="important-referral-main">जितने ज्यादा <b>genuine & verified users</b> आपके referral से जुड़ेंगे, उतना आपका referral record मजबूत होगा।</p>
+    <div class="important-referral-reward">
+      <div>🏆 <b>Top Eligible Referrer</b><span>Mahindra Thar Gift</span></div>
+      <div>🎯 <b>Your Referral Wins</b><span>आपको भी Mahindra Thar Gift</span></div>
+    </div>
+    <p class="important-referral-note">सिर्फ share/click से reward पक्का नहीं होता। Eligible referrals की verification और campaign terms के अनुसार final decision होगा.</p>
+    <button class="important-referral-btn" onclick="closeImportantReferral()">🔥 समझ गया — आगे बढ़ें</button>
+  </div>
+</div>
 
 </body>
 </html>
