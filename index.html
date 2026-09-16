@@ -1,0 +1,1911 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>₹1 Crore Grand Campaign</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif
+}
+
+body{
+    background:#f4f7ff;
+    color:#172033
+}
+
+button,input{
+    font:inherit
+}
+
+button{
+    cursor:pointer
+}
+
+.header{
+    background:linear-gradient(135deg,#155eef,#7138ff);
+    color:#fff;
+    padding:18px 15px 85px;
+    border-radius:0 0 35px 35px
+}
+
+.nav{
+    max-width:1100px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center
+}
+
+.logo{
+    font-size:21px;
+    font-weight:800
+}
+
+.nav-right{
+    display:flex;
+    gap:8px
+}
+
+.nav-btn{
+    border:1px solid rgba(255,255,255,.35);
+    background:rgba(255,255,255,.16);
+    color:white;
+    padding:9px 14px;
+    border-radius:20px
+}
+
+.hero{
+    max-width:850px;
+    margin:48px auto 0;
+    text-align:center
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 15px;
+    border-radius:30px;
+    background:rgba(255,255,255,.18);
+    font-size:13px;
+    margin-bottom:15px
+}
+
+.hero h1{
+    font-size:48px;
+    line-height:1.1;
+    margin-bottom:15px
+}
+
+.hero h1 span{
+    color:#ffe36e
+}
+
+.hero p{
+    font-size:17px;
+    line-height:1.6;
+    opacity:.92
+}
+
+.container{
+    max-width:1100px;
+    margin:-50px auto 50px;
+    padding:0 15px;
+    position:relative
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:24px;
+    margin-bottom:20px;
+    box-shadow:0 12px 40px rgba(25,50,100,.09)
+}
+
+.counter-card{
+    text-align:center
+}
+
+.status{
+    display:inline-block;
+    padding:7px 13px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    background:#eaf9ef;
+    color:#16803c;
+    margin-bottom:12px
+}
+
+.status.paused{
+    background:#fff5dd;
+    color:#956600
+}
+
+.status.closed{
+    background:#ffecec;
+    color:#c62828
+}
+
+.counter-title{
+    color:#667085;
+    font-size:13px
+}
+
+.counter{
+    font-size:43px;
+    font-weight:900;
+    color:#155eef;
+    margin-top:5px
+}
+
+.target{
+    color:#667085;
+    font-size:14px;
+    margin-top:5px
+}
+
+.progress{
+    height:12px;
+    background:#e9edfa;
+    border-radius:20px;
+    overflow:hidden;
+    margin:20px 0
+}
+
+.progress-bar{
+    width:0%;
+    height:100%;
+    background:linear-gradient(90deg,#155eef,#7138ff);
+    transition:.5s
+}
+
+.btn{
+    width:100%;
+    padding:14px;
+    border:0;
+    border-radius:13px;
+    font-weight:bold;
+    margin-top:9px
+}
+
+.primary{
+    background:linear-gradient(135deg,#155eef,#7138ff);
+    color:#fff
+}
+
+.secondary{
+    background:#eef4ff;
+    color:#155eef
+}
+
+.section-title{
+    font-size:23px;
+    margin-bottom:18px
+}
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px
+}
+
+.step{
+    background:#f7f9ff;
+    border-radius:18px;
+    padding:20px
+}
+
+.step-number{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#e9efff;
+    color:#155eef;
+    font-weight:bold;
+    margin-bottom:12px
+}
+
+.step h3{
+    margin-bottom:7px
+}
+
+.step p{
+    color:#667085;
+    line-height:1.5;
+    font-size:14px
+}
+
+.dashboard{
+    display:none
+}
+
+.dashboard.show{
+    display:block
+}
+
+.user-box{
+    background:linear-gradient(135deg,#155eef,#7138ff);
+    color:white;
+    border-radius:20px;
+    padding:22px
+}
+
+.user-box small{
+    opacity:.8
+}
+
+.user-box strong{
+    display:block;
+    font-size:25px;
+    margin-top:6px
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:15px
+}
+
+.stat{
+    background:#f7f9ff;
+    padding:18px;
+    border-radius:16px
+}
+
+.stat span{
+    color:#667085;
+    font-size:13px
+}
+
+.stat b{
+    display:block;
+    color:#155eef;
+    font-size:22px;
+    margin-top:5px
+}
+
+.sponsor{
+    display:none
+}
+
+.sponsor.show{
+    display:block
+}
+
+.sponsor-box{
+    background:linear-gradient(135deg,#fff7dc,#fff);
+    border:1px solid #ffe49a;
+    border-radius:18px;
+    padding:20px
+}
+
+.sponsor-box h3{
+    color:#805b00;
+    margin-bottom:7px
+}
+
+.sponsor-box p{
+    color:#667085;
+    line-height:1.5;
+    font-size:14px
+}
+
+.share-buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:15px
+}
+
+.share-buttons button{
+    padding:13px;
+    border:0;
+    border-radius:12px;
+    font-weight:bold
+}
+
+.whatsapp{
+    background:#25d366;
+    color:white
+}
+
+.copy{
+    background:#eef4ff;
+    color:#155eef
+}
+
+.rules{
+    color:#667085;
+    line-height:1.7;
+    font-size:14px
+}
+
+.footer{
+    text-align:center;
+    padding:30px 15px;
+    color:#667085;
+    font-size:13px
+}
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:100
+}
+
+.modal.show{
+    display:flex
+}
+
+.modal-box{
+    width:100%;
+    max-width:430px;
+    background:white;
+    border-radius:25px;
+    padding:25px
+}
+
+.close{
+    float:right;
+    border:0;
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:#f1f3f8;
+    font-size:20px
+}
+
+.auth-box{
+    display:none
+}
+
+.auth-box.active{
+    display:block
+}
+
+.form-group{
+    margin-bottom:14px
+}
+
+.form-group label{
+    display:block;
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:7px
+}
+
+.form-group input{
+    width:100%;
+    padding:13px;
+    border:1px solid #d8deeb;
+    border-radius:11px;
+    outline:none
+}
+
+.form-group input:focus{
+    border-color:#155eef
+}
+
+.switch{
+    text-align:center;
+    margin-top:14px;
+    font-size:14px;
+    color:#667085
+}
+
+.switch span{
+    color:#155eef;
+    font-weight:bold;
+    cursor:pointer
+}
+
+.message{
+    display:none;
+    padding:12px;
+    border-radius:11px;
+    margin:12px 0;
+    font-size:14px
+}
+
+.message.show{
+    display:block
+}
+
+.success{
+    background:#eaf9ef;
+    color:#16803c
+}
+
+.error{
+    background:#ffecec;
+    color:#c62828
+}
+
+.hidden{
+    display:none!important
+}
+
+@media(max-width:650px){
+
+    .hero h1{
+        font-size:36px
+    }
+
+    .steps{
+        grid-template-columns:1fr
+    }
+
+    .counter{
+        font-size:32px
+    }
+
+    .nav-right .nav-btn{
+        padding:8px 10px
+        font-size:12px
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <div class="nav">
+
+        <div class="logo">
+            🎁 1 Crore Campaign
+        </div>
+
+        <div class="nav-right">
+
+            <button
+                class="nav-btn"
+                onclick="openAuth()">
+                Login / Join
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero">
+
+        <div class="badge" id="heroBadge">
+            FREE PARTICIPATION • ₹0 ENTRY
+        </div>
+
+        <h1>
+            Join the
+            <span>₹1 Crore</span>
+            Grand Campaign
+        </h1>
+
+        <p>
+            Register completely free and participate
+            in our promotional campaign.
+        </p>
+
+    </div>
+
+</header>
+
+
+
+<main class="container">
+
+
+    <!-- COUNTER -->
+
+    <section class="card counter-card">
+
+        <div
+            id="campaignStatus"
+            class="status">
+            ACTIVE
+        </div>
+
+        <div class="counter-title">
+            LIVE PARTICIPANT COUNT
+        </div>
+
+        <div
+            class="counter"
+            id="participantCount">
+            0
+        </div>
+
+        <div
+            class="target"
+            id="targetText">
+            Target: 1,00,00,000
+        </div>
+
+        <div class="progress">
+
+            <div
+                class="progress-bar"
+                id="progressBar">
+            </div>
+
+        </div>
+
+        <button
+            id="joinButton"
+            class="btn primary"
+            onclick="openAuth()">
+            🚀 JOIN FREE NOW
+        </button>
+
+    </section>
+
+
+
+    <!-- USER DASHBOARD -->
+
+    <section
+        class="card dashboard"
+        id="dashboard">
+
+        <h2 class="section-title">
+            👋 My Participation
+        </h2>
+
+        <div class="user-box">
+
+            <small>
+                Your Participant ID
+            </small>
+
+            <strong
+                id="participantId">
+                —
+            </strong>
+
+        </div>
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <span>
+                    Joined
+                </span>
+
+                <b id="joinedDate">
+                    —
+                </b>
+
+            </div>
+
+            <div class="stat">
+
+                <span>
+                    Shares
+                </span>
+
+                <b id="shareCount">
+                    0
+                </b>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="btn primary"
+            onclick="shareCampaign()">
+            📲 Share Campaign
+        </button>
+
+
+        <button
+            class="btn secondary"
+            onclick="logoutUser()">
+            Logout
+        </button>
+
+    </section>
+
+
+
+    <!-- SPONSOR -->
+
+    <section
+        class="card sponsor"
+        id="sponsorSection">
+
+        <div class="sponsor-box">
+
+            <h3 id="sponsorName">
+                Sponsored
+            </h3>
+
+            <p id="sponsorText"></p>
+
+            <button
+                id="sponsorButton"
+                class="btn secondary">
+                Visit Sponsor
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- HOW IT WORKS -->
+
+    <section class="card">
+
+        <h2 class="section-title">
+            How It Works
+        </h2>
+
+        <div class="steps">
+
+            <div class="step">
+
+                <div class="step-number">
+                    1
+                </div>
+
+                <h3>
+                    Register
+                </h3>
+
+                <p>
+                    Create your account completely free.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    2
+                </div>
+
+                <h3>
+                    Participate
+                </h3>
+
+                <p>
+                    Get your unique participant ID after registration.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    3
+                </div>
+
+                <h3>
+                    Share
+                </h3>
+
+                <p>
+                    Share the campaign with your friends and family.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- SHARE -->
+
+    <section class="card">
+
+        <h2 class="section-title">
+            📢 Share Campaign
+        </h2>
+
+        <p style="color:#667085;line-height:1.5">
+            Share the campaign and help it reach more people.
+        </p>
+
+        <div class="share-buttons">
+
+            <button
+                class="whatsapp"
+                onclick="shareWhatsApp()">
+                WhatsApp
+            </button>
+
+            <button
+                class="copy"
+                onclick="copyLink()">
+                Copy Link
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- RULES -->
+
+    <section class="card">
+
+        <h2 class="section-title">
+            Important Information
+        </h2>
+
+        <div class="rules">
+
+            <p>
+                • Participation requires no payment.
+            </p>
+
+            <p>
+                • One genuine account per participant.
+            </p>
+
+            <p>
+                • Duplicate or fraudulent accounts may be removed.
+            </p>
+
+            <p>
+                • Campaign dates and eligibility conditions
+                are controlled by the published campaign terms.
+            </p>
+
+            <p>
+                • Any promotional prize or reward is subject
+                to applicable law and the final published Terms & Conditions.
+            </p>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<footer class="footer">
+
+    © 2026 1 Crore Campaign<br>
+    Free Promotional Campaign
+
+</footer>
+
+
+
+<!-- AUTH MODAL -->
+
+<div
+    class="modal"
+    id="authModal">
+
+    <div class="modal-box">
+
+        <button
+            class="close"
+            onclick="closeAuth()">
+            ×
+        </button>
+
+        <h2 id="authTitle">
+            Create Account
+        </h2>
+
+        <p
+            style="color:#667085;font-size:14px;margin-top:7px">
+            Join completely free.
+        </p>
+
+
+        <div
+            id="message"
+            class="message">
+        </div>
+
+
+        <!-- REGISTER -->
+
+        <div
+            class="auth-box active"
+            id="registerBox">
+
+            <div class="form-group">
+
+                <label>
+                    Full Name
+                </label>
+
+                <input
+                    id="regName"
+                    type="text"
+                    placeholder="Enter your name">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Email
+                </label>
+
+                <input
+                    id="regEmail"
+                    type="email"
+                    placeholder="Enter email">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Password
+                </label>
+
+                <input
+                    id="regPassword"
+                    type="password"
+                    placeholder="Minimum 6 characters">
+
+            </div>
+
+
+            <button
+                class="btn primary"
+                onclick="registerUser()">
+                Create Free Account
+            </button>
+
+
+            <div class="switch">
+
+                Already registered?
+
+                <span onclick="showLogin()">
+                    Login
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- LOGIN -->
+
+        <div
+            class="auth-box"
+            id="loginBox">
+
+            <div class="form-group">
+
+                <label>
+                    Email
+                </label>
+
+                <input
+                    id="loginEmail"
+                    type="email"
+                    placeholder="Enter email">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Password
+                </label>
+
+                <input
+                    id="loginPassword"
+                    type="password"
+                    placeholder="Enter password">
+
+            </div>
+
+
+            <button
+                class="btn primary"
+                onclick="loginUser()">
+                Login
+            </button>
+
+
+            <div class="switch">
+
+                New user?
+
+                <span onclick="showRegister()">
+                    Create Account
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script type="module">
+
+import {
+    initializeApp
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+    updateProfile,
+    onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+import {
+    getDatabase,
+    ref,
+    set,
+    get,
+    update,
+    increment,
+    onValue
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyCZB16fbMjPUxPlMdJdv0LGSW11YE8--2g",
+
+    authDomain:
+    "rechargeapp-eec16.firebaseapp.com",
+
+    databaseURL:
+    "https://rechargeapp-eec16-default-rtdb.firebaseio.com",
+
+    projectId:
+    "rechargeapp-eec16",
+
+    storageBucket:
+    "rechargeapp-eec16.firebasestorage.app",
+
+    messagingSenderId:
+    "625226706534",
+
+    appId:
+    "1:625226706534:web:1192e6b6a47641a48987a7",
+
+    measurementId:
+    "G-TBFD6XP9YV"
+};
+
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
+
+const db =
+    getDatabase(app);
+
+
+
+/* =========================
+   DEFAULT CAMPAIGN
+========================= */
+
+let campaign = {
+
+    status:"active",
+
+    targetParticipants:10000000,
+
+    startDate:"",
+
+    endDate:""
+
+};
+
+
+
+/* =========================
+   LOAD CAMPAIGN
+========================= */
+
+onValue(
+    ref(db,"campaign"),
+    snapshot=>{
+
+        if(snapshot.exists()){
+
+            campaign = {
+
+                ...campaign,
+                ...snapshot.val()
+
+            };
+
+        }
+
+        updateCampaignUI();
+
+    }
+);
+
+
+
+function updateCampaignUI(){
+
+    const status =
+        campaign.status || "active";
+
+
+    const statusElement =
+        document.getElementById("campaignStatus");
+
+
+    statusElement.textContent =
+        status.toUpperCase();
+
+
+    statusElement.className =
+        "status " + status;
+
+
+    const target =
+        Number(
+            campaign.targetParticipants ||
+            10000000
+        );
+
+
+    document.getElementById(
+        "targetText"
+    ).textContent =
+        "Target: " +
+        target.toLocaleString("en-IN");
+
+
+    const button =
+        document.getElementById("joinButton");
+
+
+    if(status === "closed"){
+
+        button.textContent =
+            "Campaign Closed";
+
+        button.disabled = true;
+
+        button.style.opacity = ".6";
+
+    }
+    else if(status === "paused"){
+
+        button.textContent =
+            "Campaign Paused";
+
+        button.disabled = true;
+
+        button.style.opacity = ".6";
+
+    }
+    else{
+
+        button.textContent =
+            "🚀 JOIN FREE NOW";
+
+        button.disabled = false;
+
+        button.style.opacity = "1";
+
+    }
+
+}
+
+
+
+/* =========================
+   REAL USER COUNTER
+========================= */
+
+onValue(
+    ref(db,"users"),
+    snapshot=>{
+
+        const users =
+            snapshot.exists()
+            ? snapshot.val()
+            : {};
+
+        const count =
+            Object.keys(users).length;
+
+
+        document.getElementById(
+            "participantCount"
+        ).textContent =
+            count.toLocaleString("en-IN");
+
+
+        const target =
+            Number(
+                campaign.targetParticipants ||
+                10000000
+            );
+
+
+        let percentage =
+            target > 0
+            ? (count / target) * 100
+            : 0;
+
+
+        if(percentage > 100){
+            percentage = 100;
+        }
+
+
+        document.getElementById(
+            "progressBar"
+        ).style.width =
+            percentage + "%";
+
+    }
+);
+
+
+
+/* =========================
+   AUTH STATE
+========================= */
+
+onAuthStateChanged(
+    auth,
+    async(user)=>{
+
+        if(user){
+
+            loadUser(user);
+
+        }
+        else{
+
+            document
+            .getElementById("dashboard")
+            .classList.remove("show");
+
+        }
+
+    }
+);
+
+
+
+/* =========================
+   REGISTER
+========================= */
+
+window.registerUser =
+async function(){
+
+    const name =
+        document
+        .getElementById("regName")
+        .value
+        .trim();
+
+
+    const email =
+        document
+        .getElementById("regEmail")
+        .value
+        .trim();
+
+
+    const password =
+        document
+        .getElementById("regPassword")
+        .value;
+
+
+    if(name.length < 2){
+
+        message(
+            "Please enter your full name.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(!email){
+
+        message(
+            "Please enter your email.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(password.length < 6){
+
+        message(
+            "Password must contain at least 6 characters.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(campaign.status !== "active"){
+
+        message(
+            "Campaign is currently " +
+            campaign.status + ".",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const result =
+            await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+
+        const user =
+            result.user;
+
+
+        await updateProfile(
+            user,
+            {
+                displayName:name
+            }
+        );
+
+
+        const participantId =
+            createParticipantId();
+
+
+        await set(
+            ref(db,"users/"+user.uid),
+            {
+
+                uid:user.uid,
+
+                name:name,
+
+                email:email,
+
+                participantId:
+                    participantId,
+
+                joinedAt:
+                    new Date().toISOString(),
+
+                shareCount:0,
+
+                status:"active"
+
+            }
+        );
+
+
+        message(
+            "Account created successfully!",
+            "success"
+        );
+
+
+        setTimeout(
+            closeAuth,
+            800
+        );
+
+
+    }
+    catch(error){
+
+        console.error(error);
+
+
+        let text =
+            "Registration failed.";
+
+
+        if(
+            error.code ===
+            "auth/email-already-in-use"
+        ){
+
+            text =
+                "This email is already registered.";
+
+        }
+
+
+        if(
+            error.code ===
+            "auth/invalid-email"
+        ){
+
+            text =
+                "Invalid email address.";
+
+        }
+
+
+        message(
+            text,
+            "error"
+        );
+
+    }
+
+};
+
+
+
+/* =========================
+   LOGIN
+========================= */
+
+window.loginUser =
+async function(){
+
+    const email =
+        document
+        .getElementById("loginEmail")
+        .value
+        .trim();
+
+
+    const password =
+        document
+        .getElementById("loginPassword")
+        .value;
+
+
+    if(!email || !password){
+
+        message(
+            "Enter email and password.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+
+        message(
+            "Login successful!",
+            "success"
+        );
+
+
+        setTimeout(
+            closeAuth,
+            500
+        );
+
+
+    }
+    catch(error){
+
+        message(
+            "Invalid email or password.",
+            "error"
+        );
+
+    }
+
+};
+
+
+
+/* =========================
+   LOAD USER
+========================= */
+
+async function loadUser(user){
+
+    const snapshot =
+        await get(
+            ref(db,"users/"+user.uid)
+        );
+
+
+    if(!snapshot.exists()){
+        return;
+    }
+
+
+    const data =
+        snapshot.val();
+
+
+    document
+    .getElementById("dashboard")
+    .classList.add("show");
+
+
+    document
+    .getElementById("participantId")
+    .textContent =
+        data.participantId || "—";
+
+
+    document
+    .getElementById("shareCount")
+    .textContent =
+        Number(data.shareCount || 0);
+
+
+    if(data.joinedAt){
+
+        document
+        .getElementById("joinedDate")
+        .textContent =
+            new Date(
+                data.joinedAt
+            ).toLocaleDateString("en-IN");
+
+    }
+
+}
+
+
+
+/* =========================
+   PARTICIPANT ID
+========================= */
+
+function createParticipantId(){
+
+    return "CAMP-" +
+        Math.random()
+        .toString(36)
+        .substring(2,9)
+        .toUpperCase();
+
+}
+
+
+
+/* =========================
+   SHARE
+========================= */
+
+window.shareCampaign =
+async function(){
+
+    const user =
+        auth.currentUser;
+
+
+    if(user){
+
+        await update(
+            ref(db,"users/"+user.uid),
+            {
+                shareCount:
+                    increment(1)
+            }
+        );
+
+    }
+
+
+    const url =
+        window.location.href;
+
+
+    const text =
+        "🎁 Join the FREE ₹1 Crore Campaign!\n\n" +
+        "₹0 entry required.\n\n" +
+        url;
+
+
+    if(navigator.share){
+
+        try{
+
+            await navigator.share({
+
+                title:
+                    "₹1 Crore Campaign",
+
+                text:
+                    text,
+
+                url:
+                    url
+
+            });
+
+        }
+        catch(error){}
+
+    }
+    else{
+
+        await navigator.clipboard
+        .writeText(text);
+
+        alert(
+            "Campaign link copied!"
+        );
+
+    }
+
+};
+
+
+
+/* =========================
+   WHATSAPP
+========================= */
+
+window.shareWhatsApp =
+async function(){
+
+    const user =
+        auth.currentUser;
+
+
+    if(user){
+
+        await update(
+            ref(db,"users/"+user.uid),
+            {
+                shareCount:
+                    increment(1)
+            }
+        );
+
+    }
+
+
+    const url =
+        window.location.href;
+
+
+    const text =
+        "🎁 FREE ₹1 Crore Campaign!\n\n" +
+        "Join completely free.\n" +
+        "₹0 entry.\n\n" +
+        url;
+
+
+    window.open(
+        "https://wa.me/?text="+
+        encodeURIComponent(text),
+        "_blank"
+    );
+
+};
+
+
+
+/* =========================
+   COPY
+========================= */
+
+window.copyLink =
+async function(){
+
+    const url =
+        window.location.href;
+
+
+    try{
+
+        await navigator.clipboard
+        .writeText(url);
+
+        alert(
+            "Campaign link copied!"
+        );
+
+    }
+    catch(error){
+
+        prompt(
+            "Copy this link:",
+            url
+        );
+
+    }
+
+};
+
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+window.logoutUser =
+async function(){
+
+    await signOut(auth);
+
+};
+
+
+
+/* =========================
+   AUTH MODAL
+========================= */
+
+window.openAuth =
+function(){
+
+    document
+    .getElementById("authModal")
+    .classList.add("show");
+
+};
+
+
+window.closeAuth =
+function(){
+
+    document
+    .getElementById("authModal")
+    .classList.remove("show");
+
+};
+
+
+
+window.showLogin =
+function(){
+
+    document
+    .getElementById("registerBox")
+    .classList.remove("active");
+
+
+    document
+    .getElementById("loginBox")
+    .classList.add("active");
+
+
+    document
+    .getElementById("authTitle")
+    .textContent =
+        "Login";
+
+
+    clearMessage();
+
+};
+
+
+
+window.showRegister =
+function(){
+
+    document
+    .getElementById("loginBox")
+    .classList.remove("active");
+
+
+    document
+    .getElementById("registerBox")
+    .classList.add("active");
+
+
+    document
+    .getElementById("authTitle")
+    .textContent =
+        "Create Account";
+
+
+    clearMessage();
+
+};
+
+
+
+/* =========================
+   SPONSOR
+========================= */
+
+onValue(
+    ref(db,"sponsor"),
+    snapshot=>{
+
+        const section =
+            document
+            .getElementById("sponsorSection");
+
+
+        if(!snapshot.exists()){
+
+            section.classList.remove("show");
+
+            return;
+
+        }
+
+
+        const data =
+            snapshot.val();
+
+
+        if(!data.name && !data.adText){
+
+            section.classList.remove("show");
+
+            return;
+
+        }
+
+
+        section.classList.add("show");
+
+
+        document
+        .getElementById("sponsorName")
+        .textContent =
+            data.name || "Sponsored";
+
+
+        document
+        .getElementById("sponsorText")
+        .textContent =
+            data.adText || "";
+
+
+        const button =
+            document
+            .getElementById("sponsorButton");
+
+
+        if(data.website){
+
+            button.style.display =
+                "block";
+
+
+            button.onclick =
+            function(){
+
+                window.open(
+                    data.website,
+                    "_blank",
+                    "noopener"
+                );
+
+            };
+
+        }
+        else{
+
+            button.style.display =
+                "none";
+
+        }
+
+    }
+);
+
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+function message(text,type){
+
+    const box =
+        document
+        .getElementById("message");
+
+
+    box.textContent =
+        text;
+
+
+    box.className =
+        "message show " + type;
+
+}
+
+
+function clearMessage(){
+
+    const box =
+        document
+        .getElementById("message");
+
+
+    box.textContent =
+        "";
+
+
+    box.className =
+        "message";
+
+}
+
+</script>
+
+</body>
+</html>
+```

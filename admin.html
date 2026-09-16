@@ -1,0 +1,1189 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Campaign Admin Panel</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif
+}
+
+body{
+    background:#f4f7fb;
+    color:#172033
+}
+
+.header{
+    background:linear-gradient(135deg,#155eef,#7138ff);
+    color:#fff;
+    padding:20px
+}
+
+.header-inner{
+    max-width:1150px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center
+}
+
+.logo{
+    font-size:21px;
+    font-weight:800
+}
+
+.logout{
+    border:0;
+    background:rgba(255,255,255,.18);
+    color:#fff;
+    padding:10px 16px;
+    border-radius:12px;
+    cursor:pointer
+}
+
+.container{
+    max-width:1150px;
+    margin:25px auto;
+    padding:0 15px
+}
+
+.card{
+    background:#fff;
+    padding:22px;
+    border-radius:20px;
+    margin-bottom:20px;
+    box-shadow:0 8px 30px rgba(30,50,100,.08)
+}
+
+h2{
+    margin-bottom:18px
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px
+}
+
+.stat{
+    background:#f7f9ff;
+    padding:20px;
+    border-radius:16px
+}
+
+.stat span{
+    color:#667085;
+    font-size:13px
+}
+
+.stat strong{
+    display:block;
+    color:#155eef;
+    font-size:27px;
+    margin-top:7px
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px
+}
+
+label{
+    display:block;
+    font-size:13px;
+    font-weight:bold;
+    margin:12px 0 7px
+}
+
+input,select{
+    width:100%;
+    padding:13px;
+    border:1px solid #d8deeb;
+    border-radius:11px;
+    outline:none
+}
+
+input:focus,select:focus{
+    border-color:#155eef
+}
+
+button{
+    cursor:pointer
+}
+
+.save{
+    width:100%;
+    border:0;
+    margin-top:15px;
+    padding:14px;
+    border-radius:12px;
+    color:white;
+    font-weight:bold;
+    background:linear-gradient(135deg,#155eef,#7138ff)
+}
+
+.message{
+    display:none;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:15px;
+    font-size:14px
+}
+
+.message.show{
+    display:block
+}
+
+.success{
+    background:#e9f9ef;
+    color:#16803c
+}
+
+.error{
+    background:#fff0f0;
+    color:#c62828
+}
+
+.table-wrap{
+    overflow-x:auto
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:700px
+}
+
+th,td{
+    padding:13px 10px;
+    border-bottom:1px solid #edf0f5;
+    text-align:left;
+    font-size:13px
+}
+
+th{
+    background:#f7f9ff
+}
+
+.badge{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:bold
+}
+
+.active{
+    background:#e8f8ee;
+    color:#16803c
+}
+
+.disabled{
+    background:#fff0f0;
+    color:#c62828
+}
+
+.search{
+    margin-bottom:15px
+}
+
+.small-btn{
+    border:0;
+    padding:7px 10px;
+    border-radius:8px;
+    background:#eef4ff;
+    color:#155eef;
+    font-size:12px
+}
+
+.login{
+    max-width:420px;
+    margin:70px auto;
+    padding:15px
+}
+
+.login .card{
+    padding:25px
+}
+
+.hidden{
+    display:none!important
+}
+
+.warning{
+    background:#fff8e6;
+    color:#805b00;
+    padding:13px;
+    border-radius:12px;
+    font-size:13px;
+    line-height:1.5;
+    margin-bottom:15px
+}
+
+@media(max-width:800px){
+
+    .stats{
+        grid-template-columns:1fr 1fr
+    }
+
+    .grid{
+        grid-template-columns:1fr
+    }
+}
+
+@media(max-width:500px){
+
+    .stats{
+        grid-template-columns:1fr 1fr
+    }
+
+    .stat strong{
+        font-size:22px
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ADMIN LOGIN -->
+
+<div id="loginScreen" class="login">
+
+    <div class="card">
+
+        <h2>🔐 Admin Login</h2>
+
+        <div id="loginMessage" class="message"></div>
+
+        <label>Email</label>
+        <input
+            type="email"
+            id="adminEmail"
+            placeholder="Admin email"
+        >
+
+        <label>Password</label>
+        <input
+            type="password"
+            id="adminPassword"
+            placeholder="Password"
+        >
+
+        <button class="save" onclick="adminLogin()">
+            Login
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ADMIN APP -->
+
+<div id="adminApp" class="hidden">
+
+<header class="header">
+
+    <div class="header-inner">
+
+        <div class="logo">
+            🎁 Campaign Admin
+        </div>
+
+        <button class="logout" onclick="adminLogout()">
+            Logout
+        </button>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    <div id="mainMessage" class="message"></div>
+
+
+    <!-- STATS -->
+
+    <section class="card">
+
+        <h2>📊 Dashboard</h2>
+
+        <div class="stats">
+
+            <div class="stat">
+                <span>Total Users</span>
+                <strong id="totalUsers">0</strong>
+            </div>
+
+            <div class="stat">
+                <span>Active Users</span>
+                <strong id="activeUsers">0</strong>
+            </div>
+
+            <div class="stat">
+                <span>Disabled Users</span>
+                <strong id="disabledUsers">0</strong>
+            </div>
+
+            <div class="stat">
+                <span>Total Shares</span>
+                <strong id="totalShares">0</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <div class="grid">
+
+        <!-- CAMPAIGN -->
+
+        <section class="card">
+
+            <h2>⚙️ Campaign Settings</h2>
+
+            <div class="warning">
+                Prize/promotional terms should only be published after
+                applicable legal and tax requirements have been reviewed.
+            </div>
+
+            <label>Campaign Status</label>
+
+            <select id="campaignStatus">
+                <option value="active">Active</option>
+                <option value="paused">Paused</option>
+                <option value="closed">Closed</option>
+            </select>
+
+
+            <label>Participant Target</label>
+
+            <input
+                type="number"
+                id="targetParticipants"
+                min="1"
+                value="10000000"
+            >
+
+
+            <label>Campaign Start</label>
+
+            <input
+                type="datetime-local"
+                id="startDate"
+            >
+
+
+            <label>Campaign End</label>
+
+            <input
+                type="datetime-local"
+                id="endDate"
+            >
+
+
+            <button class="save" onclick="saveCampaign()">
+                💾 Save Campaign Settings
+            </button>
+
+        </section>
+
+
+        <!-- SPONSOR -->
+
+        <section class="card">
+
+            <h2>📢 Sponsor Information</h2>
+
+            <label>Sponsor Name</label>
+
+            <input
+                id="sponsorName"
+                placeholder="Sponsor / Brand name"
+            >
+
+
+            <label>Sponsor Website</label>
+
+            <input
+                id="sponsorWebsite"
+                placeholder="https://example.com"
+            >
+
+
+            <label>Advertisement Text</label>
+
+            <input
+                id="adText"
+                placeholder="Advertisement message"
+            >
+
+
+            <button class="save" onclick="saveSponsor()">
+                Save Sponsor
+            </button>
+
+        </section>
+
+    </div>
+
+
+    <!-- USERS -->
+
+    <section class="card">
+
+        <h2>👥 Users</h2>
+
+        <input
+            class="search"
+            id="searchUser"
+            placeholder="Search name, email or participant ID..."
+            oninput="renderUsers()"
+        >
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Participant ID</th>
+                        <th>Joined</th>
+                        <th>Shares</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="usersTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- INFORMATION -->
+
+    <section class="card">
+
+        <h2>ℹ️ Campaign Information</h2>
+
+        <p style="color:#667085;line-height:1.7;font-size:14px">
+            This admin panel is for managing participants, campaign
+            settings and promotional information. It does not perform
+            or automate a random prize draw.
+        </p>
+
+    </section>
+
+</main>
+
+</div>
+
+
+<script type="module">
+
+import {
+    initializeApp
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+    getDatabase,
+    ref,
+    get,
+    set,
+    update,
+    onValue
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+
+/* =========================
+   FIREBASE
+========================= */
+
+const firebaseConfig = {
+
+    apiKey:"AIzaSyCZB16fbMjPUxPlMdJdv0LGSW11YE8--2g",
+
+    authDomain:
+    "rechargeapp-eec16.firebaseapp.com",
+
+    databaseURL:
+    "https://rechargeapp-eec16-default-rtdb.firebaseio.com",
+
+    projectId:
+    "rechargeapp-eec16",
+
+    storageBucket:
+    "rechargeapp-eec16.firebasestorage.app",
+
+    messagingSenderId:
+    "625226706534",
+
+    appId:
+    "1:625226706534:web:1192e6b6a47641a48987a7",
+
+    measurementId:
+    "G-TBFD6XP9YV"
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
+
+const db =
+    getDatabase(app);
+
+
+/* =========================
+   VARIABLES
+========================= */
+
+let usersData = {};
+
+
+/* =========================
+   AUTH STATE
+========================= */
+
+onAuthStateChanged(auth, async(user)=>{
+
+    if(!user){
+
+        showLogin();
+
+        return;
+    }
+
+
+    const adminSnapshot =
+        await get(
+            ref(db,"admins/"+user.uid)
+        );
+
+
+    if(
+        !adminSnapshot.exists() ||
+        adminSnapshot.val().enabled !== true
+    ){
+
+        await signOut(auth);
+
+        showLoginMessage(
+            "This account does not have admin access."
+        );
+
+        return;
+    }
+
+
+    showAdmin();
+
+    loadCampaign();
+
+    listenUsers();
+
+    loadSponsor();
+
+});
+
+
+/* =========================
+   ADMIN LOGIN
+========================= */
+
+window.adminLogin = async function(){
+
+    const email =
+        document.getElementById("adminEmail")
+        .value.trim();
+
+    const password =
+        document.getElementById("adminPassword")
+        .value;
+
+
+    if(!email || !password){
+
+        showLoginMessage(
+            "Email and password are required."
+        );
+
+        return;
+    }
+
+
+    try{
+
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+    }catch(error){
+
+        console.error(error);
+
+        showLoginMessage(
+            "Invalid admin email or password."
+        );
+
+    }
+
+};
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+window.adminLogout = async function(){
+
+    await signOut(auth);
+
+};
+
+
+/* =========================
+   SHOW / HIDE
+========================= */
+
+function showLogin(){
+
+    document
+    .getElementById("loginScreen")
+    .classList.remove("hidden");
+
+    document
+    .getElementById("adminApp")
+    .classList.add("hidden");
+
+}
+
+
+function showAdmin(){
+
+    document
+    .getElementById("loginScreen")
+    .classList.add("hidden");
+
+    document
+    .getElementById("adminApp")
+    .classList.remove("hidden");
+
+}
+
+
+/* =========================
+   USERS
+========================= */
+
+function listenUsers(){
+
+    onValue(
+        ref(db,"users"),
+        snapshot=>{
+
+            usersData =
+                snapshot.exists()
+                ? snapshot.val()
+                : {};
+
+            updateStats();
+
+            renderUsers();
+
+        }
+    );
+
+}
+
+
+function updateStats(){
+
+    const users =
+        Object.values(usersData);
+
+    const total =
+        users.length;
+
+    const active =
+        users.filter(
+            u=>u.status !== "disabled"
+        ).length;
+
+    const disabled =
+        users.filter(
+            u=>u.status === "disabled"
+        ).length;
+
+    const shares =
+        users.reduce(
+            (sum,u)=>
+            sum + Number(u.shareCount || 0),
+            0
+        );
+
+
+    document
+    .getElementById("totalUsers")
+    .textContent =
+        total.toLocaleString("en-IN");
+
+
+    document
+    .getElementById("activeUsers")
+    .textContent =
+        active.toLocaleString("en-IN");
+
+
+    document
+    .getElementById("disabledUsers")
+    .textContent =
+        disabled.toLocaleString("en-IN");
+
+
+    document
+    .getElementById("totalShares")
+    .textContent =
+        shares.toLocaleString("en-IN");
+
+}
+
+
+window.renderUsers = function(){
+
+    const tbody =
+        document.getElementById("usersTable");
+
+    const search =
+        document
+        .getElementById("searchUser")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    tbody.innerHTML = "";
+
+
+    Object.entries(usersData)
+    .reverse()
+    .forEach(([uid,user])=>{
+
+        const text =
+            (
+                user.name +
+                " " +
+                user.email +
+                " " +
+                user.participantId
+            ).toLowerCase();
+
+
+        if(search && !text.includes(search)){
+            return;
+        }
+
+
+        const tr =
+            document.createElement("tr");
+
+
+        const joined =
+            user.joinedAt
+            ? new Date(user.joinedAt)
+              .toLocaleDateString("en-IN")
+            : "—";
+
+
+        const disabled =
+            user.status === "disabled";
+
+
+        tr.innerHTML = `
+
+            <td>${escapeHtml(user.name || "—")}</td>
+
+            <td>${escapeHtml(user.email || "—")}</td>
+
+            <td>${escapeHtml(user.participantId || "—")}</td>
+
+            <td>${joined}</td>
+
+            <td>${Number(user.shareCount || 0)}</td>
+
+            <td>
+                <span class="badge ${disabled ? "disabled" : "active"}">
+                    ${disabled ? "Disabled" : "Active"}
+                </span>
+            </td>
+
+            <td>
+
+                <button
+                    class="small-btn"
+                    onclick="toggleUser('${uid}',${!disabled})"
+                >
+                    ${disabled ? "Enable" : "Disable"}
+                </button>
+
+            </td>
+
+        `;
+
+
+        tbody.appendChild(tr);
+
+    });
+
+};
+
+
+/* =========================
+   ENABLE / DISABLE
+========================= */
+
+window.toggleUser = async function(uid,enable){
+
+    try{
+
+        await update(
+            ref(db,"users/"+uid),
+            {
+                status:
+                    enable
+                    ? "active"
+                    : "disabled"
+            }
+        );
+
+
+        showMainMessage(
+            enable
+            ? "User enabled."
+            : "User disabled.",
+            "success"
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showMainMessage(
+            "Could not update user.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =========================
+   CAMPAIGN
+========================= */
+
+async function loadCampaign(){
+
+    try{
+
+        const snapshot =
+            await get(
+                ref(db,"campaign")
+            );
+
+
+        if(!snapshot.exists()){
+            return;
+        }
+
+
+        const data =
+            snapshot.val();
+
+
+        if(data.status)
+            document
+            .getElementById("campaignStatus")
+            .value =
+                data.status;
+
+
+        if(data.targetParticipants)
+            document
+            .getElementById("targetParticipants")
+            .value =
+                data.targetParticipants;
+
+
+        if(data.startDate)
+            document
+            .getElementById("startDate")
+            .value =
+                data.startDate;
+
+
+        if(data.endDate)
+            document
+            .getElementById("endDate")
+            .value =
+                data.endDate;
+
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+window.saveCampaign = async function(){
+
+    try{
+
+        await set(
+            ref(db,"campaign"),
+            {
+
+                status:
+                    document
+                    .getElementById("campaignStatus")
+                    .value,
+
+                targetParticipants:
+                    Number(
+                        document
+                        .getElementById("targetParticipants")
+                        .value
+                    ),
+
+                startDate:
+                    document
+                    .getElementById("startDate")
+                    .value,
+
+                endDate:
+                    document
+                    .getElementById("endDate")
+                    .value,
+
+                updatedAt:
+                    new Date().toISOString()
+
+            }
+        );
+
+
+        showMainMessage(
+            "Campaign settings saved.",
+            "success"
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showMainMessage(
+            "Could not save campaign.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =========================
+   SPONSOR
+========================= */
+
+async function loadSponsor(){
+
+    try{
+
+        const snapshot =
+            await get(
+                ref(db,"sponsor")
+            );
+
+
+        if(!snapshot.exists()){
+            return;
+        }
+
+
+        const data =
+            snapshot.val();
+
+
+        document
+        .getElementById("sponsorName")
+        .value =
+            data.name || "";
+
+
+        document
+        .getElementById("sponsorWebsite")
+        .value =
+            data.website || "";
+
+
+        document
+        .getElementById("adText")
+        .value =
+            data.adText || "";
+
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+window.saveSponsor = async function(){
+
+    try{
+
+        await set(
+            ref(db,"sponsor"),
+            {
+
+                name:
+                    document
+                    .getElementById("sponsorName")
+                    .value.trim(),
+
+                website:
+                    document
+                    .getElementById("sponsorWebsite")
+                    .value.trim(),
+
+                adText:
+                    document
+                    .getElementById("adText")
+                    .value.trim(),
+
+                updatedAt:
+                    new Date().toISOString()
+
+            }
+        );
+
+
+        showMainMessage(
+            "Sponsor information saved.",
+            "success"
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showMainMessage(
+            "Could not save sponsor.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =========================
+   MESSAGES
+========================= */
+
+function showLoginMessage(text){
+
+    const box =
+        document.getElementById("loginMessage");
+
+    box.textContent = text;
+
+    box.className =
+        "message show error";
+
+}
+
+
+function showMainMessage(text,type){
+
+    const box =
+        document.getElementById("mainMessage");
+
+    box.textContent = text;
+
+    box.className =
+        "message show " + type;
+
+
+    setTimeout(()=>{
+
+        box.className =
+            "message";
+
+    },3000);
+
+}
+
+
+/* =========================
+   HTML SECURITY
+========================= */
+
+function escapeHtml(value){
+
+    return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+</script>
+
+</body>
+</html>
+```
