@@ -5,1048 +5,192 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>₹1 Crore Grand • Mahindra Thar</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif; }
+    body { background: #0b0f1c; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 12px; color: #fff; }
+    .app-container { max-width: 430px; width: 100%; background: radial-gradient(circle at 20% 0%, #10203a, #050a14 90%); border-radius: 48px; padding: 18px 16px 12px; box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,215,0,0.15); border: 1px solid rgba(255,215,0,0.2); position: relative; overflow: hidden; }
+    .app-header { display: flex; justify-content: space-between; align-items: center; padding: 0 0 12px; }
+    .logo-group { display: flex; align-items: center; gap: 6px; }
+    .crown-icon { font-size: 30px; filter: drop-shadow(0 0 10px #fbbf24); }
+    .logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .logo-text .top { font-size: 20px; font-weight: 900; background: linear-gradient(180deg,#fde68a,#f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; }
+    .logo-text .bottom { font-size: 14px; font-weight: 700; color: #fcd34d; letter-spacing: 2px; }
+    .active-pill { background: rgba(0,255,200,0.12); border: 1.5px solid #00e0b0; border-radius: 40px; padding: 6px 14px; font-size: 13px; font-weight: 600; color: #b0fff0; display: flex; align-items: center; gap: 6px; }
+    .active-pill .dot { width: 10px; height: 10px; background: #00e0b0; border-radius: 50%; box-shadow: 0 0 10px #00e0b0; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:.7;transform:scale(.9)} 50%{opacity:1;transform:scale(1.2)} }
+    .notification-bell { position: relative; font-size: 22px; color: #fcd34d; }
+    .notification-bell .badge { position: absolute; top: -6px; right: -8px; background: #ef4444; color: white; font-size: 10px; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .hero-banner { background: linear-gradient(145deg,#0b1b3a,#1a2f5a,#0e1e3a); border-radius: 32px; padding: 16px 12px 14px; margin-bottom: 16px; border: 1px solid rgba(251,191,36,0.5); position: relative; overflow: hidden; min-height: 210px; }
+    .hero-content { position: relative; z-index: 2; display: flex; flex-direction: column; height: 100%; justify-content: space-between; }
+    .hero-top { display: flex; justify-content: space-between; align-items: flex-start; }
+    .hero-title-block { display: flex; flex-direction: column; }
+    .hero-title-block .grand-prize { font-size: 13px; font-weight: 700; color: #fcd34d; letter-spacing: 3px; text-transform: uppercase; }
+    .hero-title-block .mahindra { font-size: 30px; font-weight: 900; color: #fff; line-height: 1; }
+    .hero-title-block .thar { font-size: 38px; font-weight: 900; background: linear-gradient(180deg,#fde68a,#f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; letter-spacing: 2px; }
+    .hero-tagline { font-size: 11px; font-weight: 600; color: #cbd5e1; margin-top: 4px; }
+    .hero-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+    .crore-badge { background: linear-gradient(135deg,#ef4444,#f59e0b); padding: 6px 14px; border-radius: 20px; font-size: 14px; font-weight: 900; color: #fff; text-align: center; line-height: 1.2; }
+    .crore-badge small { display: block; font-size: 9px; font-weight: 600; opacity: 0.9; }
+    .join-now-btn { background: linear-gradient(135deg,#fbbf24,#f59e0b); border: none; border-radius: 40px; padding: 10px 30px; font-size: 16px; font-weight: 800; color: #0b0f1c; cursor: pointer; transition: transform 0.2s; align-self: flex-start; }
+    .join-now-btn:active { transform: scale(0.96); }
+    .thar-image { position: absolute; right: -20px; bottom: -15px; width: 180px; height: auto; z-index: 1; transform: scaleX(-1); opacity: 0.95; pointer-events: none; filter: drop-shadow(0 0 30px #f59e0b) brightness(1.1); }
+    .hero-dots { display: flex; justify-content: center; gap: 8px; margin-top: 8px; }
+    .hero-dots span { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+    .hero-dots span.active { background: #fbbf24; width: 22px; border-radius: 10px; }
+    .stats-row { display: flex; gap: 10px; margin-bottom: 16px; }
+    .stat-card { flex: 1; background: rgba(255,255,255,0.05); border-radius: 20px; padding: 12px 10px; border: 1px solid rgba(251,191,36,0.25); display: flex; align-items: center; gap: 8px; }
+    .stat-card .icon { font-size: 22px; }
+    .stat-card .info { display: flex; flex-direction: column; }
+    .stat-card .label { font-size: 10px; font-weight: 600; color: #94a3b8; text-transform: uppercase; }
+    .stat-card .value { font-size: 20px; font-weight: 800; color: #fcd34d; line-height: 1.2; }
+    .stat-card .sub { font-size: 10px; color: #94a3b8; }
+    .stat-card.live .value { color: #00e0b0; }
+    .action-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 8px; margin-bottom: 16px; }
+    .action-item { display: flex; flex-direction: column; align-items: center; gap: 6px; background: rgba(255,255,255,0.04); border-radius: 16px; padding: 10px 4px; border: 1px solid rgba(255,255,255,0.06); cursor: pointer; transition: transform 0.2s; }
+    .action-item:active { transform: scale(0.95); }
+    .action-item .icon-box { width: 44px; height: 44px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 22px; background: linear-gradient(145deg,#1a2f5a,#0e1e3a); border: 1px solid rgba(251,191,36,0.3); }
+    .action-item .label { font-size: 10px; font-weight: 600; color: #cbd5e1; text-align: center; }
+    .referral-banner { background: linear-gradient(135deg,#1e293b,#0f172a); border-radius: 24px; padding: 16px 14px; margin-bottom: 16px; border: 1.5px solid #fbbf24; display: flex; align-items: center; gap: 12px; position: relative; overflow: hidden; }
+    .referral-icon { font-size: 40px; z-index: 2; }
+    .referral-text { flex: 1; z-index: 2; }
+    .referral-text h4 { font-size: 16px; font-weight: 800; color: #fcd34d; margin-bottom: 2px; }
+    .referral-text p { font-size: 11px; color: #cbd5e1; line-height: 1.4; margin-bottom: 6px; }
+    .referral-text p strong { color: #fbbf24; }
+    .know-more-btn { background: transparent; border: 1.5px solid #fbbf24; border-radius: 30px; padding: 5px 14px; font-size: 11px; font-weight: 700; color: #fcd34d; cursor: pointer; }
+    .referral-thar-emoji { font-size: 48px; z-index: 2; animation: float 3s ease-in-out infinite; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+    .progress-section { background: rgba(255,255,255,0.04); border-radius: 20px; padding: 14px 16px; margin-bottom: 16px; }
+    .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .progress-header .title { font-size: 14px; font-weight: 700; color: #e2e8f0; }
+    .progress-header .percentage { font-size: 20px; font-weight: 900; color: #00e0b0; }
+    .progress-bar-bg { width: 100%; height: 10px; background: rgba(255,255,255,0.1); border-radius: 20px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg,#00e0b0,#4cd964,#fbbf24); border-radius: 20px; transition: width 0.8s ease; }
+    .progress-footer { display: flex; justify-content: space-between; font-size: 11px; color: #94a3b8; margin-top: 6px; }
+    .activity-bar { background: rgba(255,255,255,0.04); border-radius: 30px; padding: 10px 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .activity-bar .icon { font-size: 18px; color: #fbbf24; }
+    .activity-bar .text { flex: 1; font-size: 12px; color: #cbd5e1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .activity-bar .text strong { color: #fcd34d; }
+    .bottom-nav { display: flex; justify-content: space-around; align-items: center; padding: 8px 0 4px; }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; color: #64748b; font-size: 10px; font-weight: 600; cursor: pointer; }
+    .nav-item.active { color: #fcd34d; }
+    .nav-item .nav-icon { font-size: 22px; }
+    .nav-item.center { margin-top: -24px; }
+    .nav-item.center .nav-icon { width: 56px; height: 56px; background: linear-gradient(145deg,#fbbf24,#f59e0b); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; color: #0b0f1c; border: 3px solid #0b0f1c; }
+    .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; padding: 20px; z-index: 1000; }
+    .modal.show { display: flex; }
+    .modal-box { width: 100%; max-width: 400px; background: linear-gradient(145deg,#1e293b,#0f172a); border-radius: 28px; padding: 26px 22px; border: 1px solid rgba(251,191,36,0.3); color: #fff; position: relative; }
+    .modal-box .close { position: absolute; right: 16px; top: 16px; background: rgba(255,255,255,0.08); border: none; color: #94a3b8; font-size: 24px; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; }
+    .modal-box h2 { font-size: 24px; font-weight: 800; background: linear-gradient(180deg,#fde68a,#f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4px; }
+    .modal-box p { color: #94a3b8; font-size: 14px; margin-bottom: 16px; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 12px; font-weight: 700; color: #cbd5e1; margin-bottom: 5px; text-transform: uppercase; }
+    .form-group input { width: 100%; padding: 12px 16px; border-radius: 14px; border: 1.5px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: #fff; font-size: 14px; outline: none; }
+    .form-group input:focus { border-color: #fbbf24; }
+    .form-group input::placeholder { color: #64748b; }
+    .btn { width: 100%; padding: 14px; border: none; border-radius: 16px; font-weight: 800; font-size: 16px; cursor: pointer; margin-top: 6px; position: relative; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn.primary { background: linear-gradient(135deg,#fbbf24,#f59e0b); color: #0b0f1c; }
+    .btn.primary:disabled { opacity: 0.7; cursor: not-allowed; }
+    .btn .spinner { width: 18px; height: 18px; border: 3px solid rgba(11,15,28,0.3); border-top-color: #0b0f1c; border-radius: 50%; animation: spin 0.7s linear infinite; display: none; }
+    .btn.loading .spinner { display: block; }
+    .btn.loading .btn-text { opacity: 0.7; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .switch { text-align: center; margin-top: 16px; font-size: 14px; color: #94a3b8; }
+    .switch span { color: #fcd34d; font-weight: 700; cursor: pointer; text-decoration: underline; }
+    .message { display: none; padding: 12px 16px; border-radius: 14px; margin-bottom: 16px; font-size: 14px; font-weight: 600; }
+    .message.show { display: block; }
+    .message.success { background: rgba(0,224,176,0.15); border: 1px solid #00e0b0; color: #b0fff0; }
+    .message.error { background: rgba(239,68,68,0.15); border: 1px solid #ef4444; color: #fca5a5; }
+    .auth-box { display: none; }
+    .auth-box.active { display: block; }
+    .important-referral-overlay { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 18px; background: rgba(7,18,48,0.8); backdrop-filter: blur(10px); }
+    .important-referral-card { width: min(420px,100%); background: linear-gradient(145deg,#1e293b,#0f172a); border: 1px solid rgba(251,191,36,0.4); border-radius: 32px; padding: 28px 20px 22px; text-align: center; position: relative; }
+    .important-referral-close { position: absolute; right: 14px; top: 12px; width: 36px; height: 36px; border: none; border-radius: 50%; background: rgba(255,255,255,0.08); color: #94a3b8; font-size: 26px; cursor: pointer; }
+    .important-referral-badge { display: inline-block; padding: 7px 16px; border-radius: 999px; background: rgba(251,191,36,0.15); color: #fcd34d; font-size: 11px; font-weight: 900; border: 1px solid rgba(251,191,36,0.3); }
+    .important-referral-icon { font-size: 56px; margin: 10px 0 4px; }
+    .important-referral-card h2 { margin: 4px 0 8px; font-size: 26px; color: #fff; font-weight: 800; }
+    .important-referral-card h2 span { color: #fcd34d; }
+    .important-referral-main { margin: 0 auto 14px; color: #94a3b8; font-size: 14px; line-height: 1.6; }
+    .important-referral-main b { color: #fcd34d; }
+    .important-referral-reward { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; }
+    .important-referral-reward div { padding: 14px 8px; border-radius: 18px; background: rgba(255,255,255,0.04); border: 1px solid rgba(251,191,36,0.2); font-size: 13px; color: #e2e8f0; }
+    .important-referral-reward b, .important-referral-reward span { display: block; }
+    .important-referral-reward span { margin-top: 4px; color: #fcd34d; font-size: 12px; font-weight: 800; }
+    .important-referral-note { font-size: 11px; line-height: 1.6; color: #64748b; margin: 10px 4px 16px; }
+    .important-referral-btn { width: 100%; border: none; border-radius: 16px; padding: 15px; background: linear-gradient(135deg,#fbbf24,#f59e0b); color: #0b0f1c; font-size: 16px; font-weight: 900; cursor: pointer; }
 
-    body {
-      background: #0b0f1c;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px;
-      color: #fff;
+    /* === SHARE MODAL === */
+    .share-modal {
+      position: fixed; inset: 0; z-index: 10000;
+      display: none; align-items: flex-end; justify-content: center;
+      background: rgba(0,0,0,0.65); backdrop-filter: blur(6px);
     }
-
-    .app-container {
-      max-width: 430px;
-      width: 100%;
-      background: radial-gradient(circle at 20% 0%, #10203a, #050a14 90%);
-      border-radius: 48px;
-      padding: 18px 16px 12px;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 215, 0, 0.15);
-      border: 1px solid rgba(255, 215, 0, 0.2);
+    .share-modal.show { display: flex; }
+    .share-sheet {
+      width: 100%; max-width: 430px;
+      background: linear-gradient(145deg,#1e293b,#0f172a);
+      border-radius: 28px 28px 0 0;
+      padding: 22px 20px 26px;
+      border: 1px solid rgba(251,191,36,0.3);
+      border-bottom: none;
+      animation: slideUp 0.35s cubic-bezier(0.2,0.85,0.2,1);
       position: relative;
-      overflow: hidden;
     }
-
-    /* header */
-    .app-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 0 12px;
+    @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+    .share-sheet h3 {
+      font-size: 18px; font-weight: 800; color: #fcd34d;
+      margin-bottom: 4px; text-align: center;
     }
-
-    .logo-group {
-      display: flex;
-      align-items: center;
-      gap: 6px;
+    .share-sheet .sub {
+      font-size: 12px; color: #94a3b8; text-align: center; margin-bottom: 18px;
     }
-
-    .crown-icon {
-      font-size: 30px;
-      filter: drop-shadow(0 0 10px #fbbf24);
+    .share-sheet .handle {
+      width: 40px; height: 4px; background: rgba(255,255,255,0.2);
+      border-radius: 10px; margin: 0 auto 16px;
     }
-
-    .logo-text {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
-
-    .logo-text .top {
-      font-size: 20px;
-      font-weight: 900;
-      background: linear-gradient(180deg, #fde68a, #f59e0b);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      letter-spacing: -0.5px;
-      text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
-    }
-
-    .logo-text .bottom {
-      font-size: 14px;
-      font-weight: 700;
-      color: #fcd34d;
-      letter-spacing: 2px;
-      text-shadow: 0 0 15px #f59e0b;
-    }
-
-    .active-pill {
-      background: rgba(0, 255, 200, 0.12);
-      border: 1.5px solid #00e0b0;
-      border-radius: 40px;
-      padding: 6px 14px;
-      font-size: 13px;
-      font-weight: 600;
-      color: #b0fff0;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 0 15px rgba(0, 255, 200, 0.2);
-    }
-
-    .active-pill .dot {
-      width: 10px;
-      height: 10px;
-      background: #00e0b0;
-      border-radius: 50%;
-      box-shadow: 0 0 10px #00e0b0;
-      animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-      0% { opacity: 0.7; transform: scale(0.9); }
-      50% { opacity: 1; transform: scale(1.2); }
-      100% { opacity: 0.7; transform: scale(0.9); }
-    }
-
-    .notification-bell {
-      position: relative;
-      font-size: 22px;
-      color: #fcd34d;
-      filter: drop-shadow(0 0 8px #f59e0b);
-    }
-
-    .notification-bell .badge {
-      position: absolute;
-      top: -6px;
-      right: -8px;
-      background: #ef4444;
-      color: white;
-      font-size: 10px;
-      font-weight: 700;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* hero banner */
-    .hero-banner {
-      background: linear-gradient(145deg, #0b1b3a, #1a2f5a, #0e1e3a);
-      border-radius: 32px;
-      padding: 16px 12px 14px;
-      margin-bottom: 16px;
-      border: 1px solid rgba(251, 191, 36, 0.5);
-      box-shadow: 0 0 40px rgba(251, 191, 36, 0.2), inset 0 0 40px rgba(251, 191, 36, 0.05);
-      position: relative;
-      overflow: hidden;
-      min-height: 210px;
-    }
-
-    .hero-banner::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at 30% 40%, rgba(251, 191, 36, 0.08), transparent 60%);
-      pointer-events: none;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      justify-content: space-between;
-    }
-
-    .hero-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
-
-    .hero-title-block {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .hero-title-block .grand-prize {
-      font-size: 13px;
-      font-weight: 700;
-      color: #fcd34d;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      text-shadow: 0 0 20px #f59e0b;
-    }
-
-    .hero-title-block .mahindra {
-      font-size: 30px;
-      font-weight: 900;
-      color: #fff;
-      line-height: 1;
-      text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-    }
-
-    .hero-title-block .thar {
-      font-size: 38px;
-      font-weight: 900;
-      background: linear-gradient(180deg, #fde68a, #f59e0b);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      line-height: 1;
-      text-shadow: 0 0 40px rgba(251, 191, 36, 0.6);
-      letter-spacing: 2px;
-    }
-
-    .hero-tagline {
-      font-size: 11px;
-      font-weight: 600;
-      color: #cbd5e1;
-      margin-top: 4px;
-      letter-spacing: 0.5px;
-    }
-
-    .hero-right {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 8px;
-    }
-
-    .crore-badge {
-      background: linear-gradient(135deg, #ef4444, #f59e0b);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 14px;
-      font-weight: 900;
-      color: #fff;
-      box-shadow: 0 0 25px rgba(239, 68, 68, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      text-align: center;
-      line-height: 1.2;
-    }
-
-    .crore-badge small {
-      display: block;
-      font-size: 9px;
-      font-weight: 600;
-      opacity: 0.9;
-    }
-
-    .join-now-btn {
-      background: linear-gradient(135deg, #fbbf24, #f59e0b);
-      border: none;
-      border-radius: 40px;
-      padding: 10px 30px;
-      font-size: 16px;
-      font-weight: 800;
-      color: #0b0f1c;
-      box-shadow: 0 0 30px rgba(251, 191, 36, 0.7);
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-      letter-spacing: 0.5px;
-      margin-top: 6px;
-      align-self: flex-start;
-    }
-
-    .join-now-btn:active {
-      transform: scale(0.96);
-      box-shadow: 0 0 20px rgba(251, 191, 36, 0.9);
-    }
-
-    /* NEW: Thar Image Style */
-    .thar-image {
-      position: absolute;
-      right: -20px;
-      bottom: -15px;
-      width: 180px;
-      height: auto;
-      z-index: 1;
-      filter: drop-shadow(0 0 30px #f59e0b) brightness(1.1) contrast(1.1);
-      transform: scaleX(-1);
-      opacity: 0.95;
-      pointer-events: none;
-    }
-
-    .hero-dots {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 8px;
-    }
-
-    .hero-dots span {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.3);
-    }
-
-    .hero-dots span.active {
-      background: #fbbf24;
-      box-shadow: 0 0 15px #fbbf24;
-      width: 22px;
-      border-radius: 10px;
-    }
-
-    /* stats row */
-    .stats-row {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-
-    .stat-card {
-      flex: 1;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      padding: 12px 10px;
-      border: 1px solid rgba(251, 191, 36, 0.25);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(251, 191, 36, 0.05);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .stat-card .icon {
-      font-size: 22px;
-      filter: drop-shadow(0 0 8px #fbbf24);
-    }
-
-    .stat-card .info {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .stat-card .label {
-      font-size: 10px;
-      font-weight: 600;
-      color: #94a3b8;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .stat-card .value {
-      font-size: 20px;
-      font-weight: 800;
-      color: #fcd34d;
-      text-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
-      line-height: 1.2;
-    }
-
-    .stat-card .sub {
-      font-size: 10px;
-      color: #94a3b8;
-    }
-
-    .stat-card.live .value {
-      color: #00e0b0;
-      text-shadow: 0 0 15px rgba(0, 224, 176, 0.6);
-    }
-
-    .live-badge {
-      background: #ef4444;
-      color: white;
-      font-size: 9px;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 20px;
-      letter-spacing: 0.5px;
-      animation: blink 1.5s infinite;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-
-    /* action grid */
-    .action-grid {
+    .share-grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-
-    .action-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.04);
-      border-radius: 16px;
-      padding: 10px 4px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      transition: transform 0.2s, background 0.2s;
-      cursor: pointer;
-    }
-
-    .action-item:active {
-      transform: scale(0.95);
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .action-item .icon-box {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      background: linear-gradient(145deg, #1a2f5a, #0e1e3a);
-      box-shadow: 0 0 20px rgba(251, 191, 36, 0.15), inset 0 0 15px rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(251, 191, 36, 0.3);
-    }
-
-    .action-item .label {
-      font-size: 10px;
-      font-weight: 600;
-      color: #cbd5e1;
-      text-align: center;
-      line-height: 1.2;
-    }
-
-    /* referral banner */
-    .referral-banner {
-      background: linear-gradient(135deg, #1e293b, #0f172a);
-      border-radius: 24px;
-      padding: 16px 14px;
-      margin-bottom: 16px;
-      border: 1.5px solid #fbbf24;
-      box-shadow: 0 0 40px rgba(251, 191, 36, 0.2), inset 0 0 30px rgba(251, 191, 36, 0.05);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .referral-banner::before {
-      content: '';
-      position: absolute;
-      top: -30%;
-      left: -20%;
-      width: 140%;
-      height: 140%;
-      background: radial-gradient(circle at 70% 30%, rgba(251, 191, 36, 0.08), transparent 70%);
-      pointer-events: none;
-    }
-
-    .referral-icon {
-      font-size: 40px;
-      filter: drop-shadow(0 0 15px #fbbf24);
-      z-index: 2;
-    }
-
-    .referral-text {
-      flex: 1;
-      z-index: 2;
-    }
-
-    .referral-text h4 {
-      font-size: 16px;
-      font-weight: 800;
-      color: #fcd34d;
-      margin-bottom: 2px;
-      text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
-    }
-
-    .referral-text p {
-      font-size: 11px;
-      color: #cbd5e1;
-      line-height: 1.4;
-      margin-bottom: 6px;
-    }
-
-    .referral-text p strong {
-      color: #fbbf24;
-    }
-
-    .know-more-btn {
-      background: transparent;
-      border: 1.5px solid #fbbf24;
-      border-radius: 30px;
-      padding: 5px 14px;
-      font-size: 11px;
-      font-weight: 700;
-      color: #fcd34d;
-      cursor: pointer;
-      transition: background 0.2s, box-shadow 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .know-more-btn:active {
-      background: rgba(251, 191, 36, 0.2);
-      box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
-    }
-
-    .referral-thar-emoji {
-      font-size: 48px;
-      z-index: 2;
-      filter: drop-shadow(0 0 20px #ef4444);
-      animation: float 3s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
-
-    /* campaign progress */
-    .progress-section {
-      background: rgba(255, 255, 255, 0.04);
-      border-radius: 20px;
-      padding: 14px 16px;
-      margin-bottom: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(10px);
-    }
-
-    .progress-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
       margin-bottom: 8px;
     }
-
-    .progress-header .title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #e2e8f0;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .share-option {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      cursor: pointer; transition: transform 0.2s;
     }
-
-    .progress-header .percentage {
-      font-size: 20px;
-      font-weight: 900;
-      color: #00e0b0;
-      text-shadow: 0 0 20px rgba(0, 224, 176, 0.5);
+    .share-option:active { transform: scale(0.9); }
+    .share-option .icon {
+      width: 52px; height: 52px; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
-
-    .progress-bar-bg {
-      width: 100%;
-      height: 10px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6);
+    .share-option .label {
+      font-size: 10px; font-weight: 600; color: #cbd5e1; text-align: center;
     }
-
-    .progress-bar-fill {
-      height: 100%;
-      width: 78%;
-      background: linear-gradient(90deg, #00e0b0, #4cd964, #fbbf24);
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0, 224, 176, 0.6);
-      transition: width 0.8s ease;
-    }
-
-    .progress-footer {
-      display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      color: #94a3b8;
-      margin-top: 6px;
-    }
-
-    /* recent activity */
-    .activity-bar {
-      background: rgba(255, 255, 255, 0.04);
-      border-radius: 30px;
-      padding: 10px 16px;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      overflow: hidden;
-    }
-
-    .activity-bar .icon {
-      font-size: 18px;
-      color: #fbbf24;
-    }
-
-    .activity-bar .text {
-      flex: 1;
-      font-size: 12px;
-      color: #cbd5e1;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .activity-bar .text strong {
-      color: #fcd34d;
-    }
-
-    .activity-bar .arrow {
-      color: #fbbf24;
-      font-size: 16px;
-    }
-
-    /* bottom nav */
-    .bottom-nav {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      padding: 8px 0 4px;
-      position: relative;
-    }
-
-    .nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-      color: #64748b;
-      font-size: 10px;
-      font-weight: 600;
+    .share-option.whatsapp .icon { background: linear-gradient(135deg,#25d366,#128c7e); }
+    .share-option.facebook .icon { background: linear-gradient(135deg,#1877f2,#0d5fd1); }
+    .share-option.twitter .icon { background: linear-gradient(135deg,#000,#1d9bf0); }
+    .share-option.telegram .icon { background: linear-gradient(135deg,#0088cc,#0077b5); }
+    .share-option.copy .icon { background: linear-gradient(135deg,#fbbf24,#f59e0b); color: #0b0f1c; }
+    .share-option.email .icon { background: linear-gradient(135deg,#ea4335,#c5221f); }
+    .share-option.sms .icon { background: linear-gradient(135deg,#00e0b0,#00a080); }
+    .share-option.more .icon { background: linear-gradient(145deg,#1a2f5a,#0e1e3a); }
+    .share-close {
+      width: 100%; margin-top: 12px; padding: 14px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px; color: #cbd5e1; font-weight: 700; font-size: 14px;
       cursor: pointer;
-      transition: color 0.2s;
-      position: relative;
     }
 
-    .nav-item.active {
-      color: #fcd34d;
-    }
-
-    .nav-item .nav-icon {
-      font-size: 22px;
-      filter: drop-shadow(0 0 8px currentColor);
-    }
-
-    .nav-item.center {
-      margin-top: -24px;
-    }
-
-    .nav-item.center .nav-icon {
-      width: 56px;
-      height: 56px;
-      background: linear-gradient(145deg, #fbbf24, #f59e0b);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      color: #0b0f1c;
-      box-shadow: 0 0 40px rgba(251, 191, 36, 0.8), 0 8px 20px rgba(0, 0, 0, 0.6);
-      border: 3px solid #0b0f1c;
-    }
-
-    .nav-item.center .nav-label {
-      margin-top: 2px;
-    }
-
-    /* modal & auth (keep original functionality) */
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(8px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      z-index: 1000;
-    }
-
-    .modal.show {
-      display: flex;
-    }
-
-    .modal-box {
-      width: 100%;
-      max-width: 400px;
-      background: linear-gradient(145deg, #1e293b, #0f172a);
-      border-radius: 28px;
-      padding: 26px 22px;
-      border: 1px solid rgba(251, 191, 36, 0.3);
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
-      color: #fff;
-      position: relative;
-    }
-
-    .modal-box .close {
-      position: absolute;
-      right: 16px;
-      top: 16px;
-      background: rgba(255, 255, 255, 0.08);
-      border: none;
-      color: #94a3b8;
-      font-size: 24px;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modal-box h2 {
-      font-size: 24px;
-      font-weight: 800;
-      background: linear-gradient(180deg, #fde68a, #f59e0b);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 4px;
-    }
-
-    .modal-box p {
-      color: #94a3b8;
-      font-size: 14px;
-      margin-bottom: 16px;
-    }
-
-    .form-group {
-      margin-bottom: 14px;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 12px;
-      font-weight: 700;
-      color: #cbd5e1;
-      margin-bottom: 5px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .form-group input {
-      width: 100%;
-      padding: 12px 16px;
-      border-radius: 14px;
-      border: 1.5px solid rgba(255, 255, 255, 0.1);
-      background: rgba(255, 255, 255, 0.05);
-      color: #fff;
-      font-size: 14px;
-      outline: none;
-      transition: border 0.2s, box-shadow 0.2s;
-    }
-
-    .form-group input:focus {
-      border-color: #fbbf24;
-      box-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
-    }
-
-    .form-group input::placeholder {
-      color: #64748b;
-    }
-
-    .btn {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 16px;
-      font-weight: 800;
-      font-size: 16px;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-      margin-top: 6px;
-    }
-
-    .btn.primary {
-      background: linear-gradient(135deg, #fbbf24, #f59e0b);
-      color: #0b0f1c;
-      box-shadow: 0 0 30px rgba(251, 191, 36, 0.5);
-    }
-
-    .btn.primary:active {
-      transform: scale(0.97);
-    }
-
-    .switch {
-      text-align: center;
-      margin-top: 16px;
-      font-size: 14px;
-      color: #94a3b8;
-    }
-
-    .switch span {
-      color: #fcd34d;
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: underline;
-    }
-
-    .message {
-      display: none;
-      padding: 12px 16px;
-      border-radius: 14px;
-      margin-bottom: 16px;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .message.show {
-      display: block;
-    }
-
-    .message.success {
-      background: rgba(0, 224, 176, 0.15);
-      border: 1px solid #00e0b0;
-      color: #b0fff0;
-    }
-
-    .message.error {
-      background: rgba(239, 68, 68, 0.15);
-      border: 1px solid #ef4444;
-      color: #fca5a5;
-    }
-
-    .auth-box {
-      display: none;
-    }
-
-    .auth-box.active {
-      display: block;
-    }
-
-    /* popup */
-    .important-referral-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
-      background: rgba(7, 18, 48, 0.8);
-      backdrop-filter: blur(10px);
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .important-referral-card {
-      width: min(420px, 100%);
-      position: relative;
-      background: linear-gradient(145deg, #1e293b, #0f172a);
-      border: 1px solid rgba(251, 191, 36, 0.4);
-      border-radius: 32px;
-      padding: 28px 20px 22px;
-      text-align: center;
-      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7);
-      animation: popIn 0.45s cubic-bezier(0.2, 0.85, 0.2, 1);
-      overflow: hidden;
-    }
-
-    @keyframes popIn {
-      from { opacity: 0; transform: translateY(30px) scale(0.92); }
-      to { opacity: 1; transform: none; }
-    }
-
-    .important-referral-card::before {
-      content: '';
-      position: absolute;
-      width: 200px;
-      height: 200px;
-      left: -100px;
-      top: -100px;
-      background: rgba(251, 191, 36, 0.12);
-      border-radius: 50%;
-      filter: blur(20px);
-      animation: floatBlob 6s ease-in-out infinite;
-    }
-
-    .important-referral-card::after {
-      content: '';
-      position: absolute;
-      right: -100px;
-      bottom: -100px;
-      width: 200px;
-      height: 200px;
-      background: rgba(21, 94, 239, 0.12);
-      border-radius: 50%;
-      filter: blur(20px);
-      animation: floatBlob 7s ease-in-out infinite reverse;
-    }
-
-    @keyframes floatBlob {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(30px, -20px); }
-    }
-
-    .important-referral-card > * {
-      position: relative;
-      z-index: 2;
-    }
-
-    .important-referral-close {
-      position: absolute;
-      right: 14px;
-      top: 12px;
-      z-index: 5;
-      width: 36px;
-      height: 36px;
-      border: none;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.08);
-      color: #94a3b8;
-      font-size: 26px;
-      line-height: 1;
-      cursor: pointer;
-      transition: 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .important-referral-close:hover {
-      background: rgba(255, 255, 255, 0.15);
-      transform: rotate(90deg);
-    }
-
-    .important-referral-badge {
-      display: inline-block;
-      padding: 7px 16px;
-      border-radius: 999px;
-      background: rgba(251, 191, 36, 0.15);
-      color: #fcd34d;
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 0.5px;
-      border: 1px solid rgba(251, 191, 36, 0.3);
-      animation: pulse 2s infinite;
-    }
-
-    .important-referral-icon {
-      font-size: 56px;
-      margin: 10px 0 4px;
-      animation: float 2.5s ease-in-out infinite;
-      filter: drop-shadow(0 0 25px #fbbf24);
-    }
-
-    .important-referral-card h2 {
-      margin: 4px 0 8px;
-      font-size: 26px;
-      line-height: 1.15;
-      color: #fff;
-      font-weight: 800;
-    }
-
-    .important-referral-card h2 span {
-      color: #fcd34d;
-    }
-
-    .important-referral-main {
-      margin: 0 auto 14px;
-      max-width: 360px;
-      color: #94a3b8;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .important-referral-main b {
-      color: #fcd34d;
-    }
-
-    .important-referral-reward {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin: 14px 0;
-    }
-
-    .important-referral-reward div {
-      padding: 14px 8px;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(251, 191, 36, 0.2);
-      font-size: 13px;
-      color: #e2e8f0;
-      backdrop-filter: blur(5px);
-    }
-
-    .important-referral-reward div:nth-child(2) {
-      border-color: rgba(0, 224, 176, 0.2);
-    }
-
-    .important-referral-reward b,
-    .important-referral-reward span {
-      display: block;
-    }
-
-    .important-referral-reward span {
-      margin-top: 4px;
-      color: #fcd34d;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .important-referral-reward div:nth-child(2) span {
-      color: #00e0b0;
-    }
-
-    .important-referral-note {
-      font-size: 11px;
-      line-height: 1.6;
-      color: #64748b;
-      margin: 10px 4px 16px;
-    }
-
-    .important-referral-btn {
-      width: 100%;
-      border: none;
-      border-radius: 16px;
-      padding: 15px 16px;
-      background: linear-gradient(135deg, #fbbf24, #f59e0b);
-      color: #0b0f1c;
-      font-size: 16px;
-      font-weight: 900;
-      cursor: pointer;
-      box-shadow: 0 0 40px rgba(251, 191, 36, 0.5);
-      transition: 0.2s;
-    }
-
-    .important-referral-btn:active {
-      transform: scale(0.97);
-      box-shadow: 0 0 60px rgba(251, 191, 36, 0.8);
-    }
-
-    /* hidden elements (original functionality kept) */
-    .hidden {
-      display: none !important;
-    }
-
-    .dashboard, .sponsor, .card:not(.counter-card):not(.winner-card) {
-      display: none;
-    }
-
-    /* responsive */
     @media (max-width: 400px) {
-      .app-container { padding: 12px 10px 8px; border-radius: 32px; }
       .hero-title-block .mahindra { font-size: 24px; }
       .hero-title-block .thar { font-size: 30px; }
-      .crore-badge { font-size: 11px; padding: 4px 10px; }
-      .join-now-btn { font-size: 14px; padding: 8px 22px; }
-      .stat-card .value { font-size: 16px; }
-      .action-item .icon-box { width: 38px; height: 38px; font-size: 18px; }
-      .action-item .label { font-size: 8px; }
-      .referral-text h4 { font-size: 13px; }
-      .referral-text p { font-size: 9px; }
-      .referral-thar-emoji { font-size: 36px; }
-      .thar-image { width: 130px; right: -15px; bottom: -10px; }
+      .thar-image { width: 130px; }
     }
   </style>
 </head>
 <body>
 
   <div class="app-container">
-    <!-- header -->
     <div class="app-header">
       <div class="logo-group">
         <div class="crown-icon">👑</div>
@@ -1056,19 +200,13 @@
         </div>
       </div>
       <div style="display:flex; align-items:center; gap:10px;">
-        <div class="active-pill">
-          <span class="dot"></span> Campaign Active ›
-        </div>
+        <div class="active-pill"><span class="dot"></span> Campaign Active ›</div>
         <div class="notification-bell">🔔<span class="badge">3</span></div>
       </div>
     </div>
 
-    <!-- hero banner -->
     <div class="hero-banner">
-      <!-- REPLACED EMOJI WITH IMAGE -->
-      <img src="https://images.unsplash.com/photo-1723306975792-f5a053a59dd3?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-           alt="Mahindra Thar" 
-           class="thar-image">
+      <img src="https://images.unsplash.com/photo-1723306975792-f5a053a59dd3?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.1.0" alt="Mahindra Thar" class="thar-image">
       <div class="hero-content">
         <div class="hero-top">
           <div class="hero-title-block">
@@ -1083,22 +221,17 @@
         </div>
         <button class="join-now-btn" onclick="openAuth()">Join Now ›</button>
         <div class="hero-dots">
-          <span class="active"></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
+          <span class="active"></span><span></span><span></span><span></span><span></span>
         </div>
       </div>
     </div>
 
-    <!-- stats row -->
     <div class="stats-row">
       <div class="stat-card live">
         <div class="icon">👥</div>
         <div class="info">
           <div class="label">Total Participants</div>
-          <div class="value" id="participantCount">124,583</div>
+          <div class="value" id="participantCount">0</div>
           <div class="sub">● LIVE</div>
         </div>
       </div>
@@ -1112,31 +245,14 @@
       </div>
     </div>
 
-    <!-- action grid -->
     <div class="action-grid">
-      <div class="action-item" onclick="alert('Rewards section coming soon!')">
-        <div class="icon-box">🎁</div>
-        <div class="label">Rewards</div>
-      </div>
-      <div class="action-item" onclick="shareCampaign()">
-        <div class="icon-box">📤</div>
-        <div class="label">Share</div>
-      </div>
-      <div class="action-item" onclick="alert('Invite friends and earn rewards!')">
-        <div class="icon-box">👥</div>
-        <div class="label">Invite</div>
-      </div>
-      <div class="action-item" onclick="alert('Leaderboard will be available soon!')">
-        <div class="icon-box">🏆</div>
-        <div class="label">Leaderboard</div>
-      </div>
-      <div class="action-item" onclick="alert('Campaign rules: Free to join, one account per person.')">
-        <div class="icon-box">📋</div>
-        <div class="label">Rules</div>
-      </div>
+      <div class="action-item" onclick="alert('Rewards section coming soon!')"><div class="icon-box">🎁</div><div class="label">Rewards</div></div>
+      <div class="action-item" onclick="shareCampaign()"><div class="icon-box">📤</div><div class="label">Share</div></div>
+      <div class="action-item" onclick="alert('Invite friends and earn rewards!')"><div class="icon-box">👥</div><div class="label">Invite</div></div>
+      <div class="action-item" onclick="alert('Leaderboard will be available soon!')"><div class="icon-box">🏆</div><div class="label">Leaderboard</div></div>
+      <div class="action-item" onclick="alert('Campaign rules: Free to join, one account per person.')"><div class="icon-box">📋</div><div class="label">Rules</div></div>
     </div>
 
-    <!-- referral banner -->
     <div class="referral-banner">
       <div class="referral-icon">👥</div>
       <div class="referral-text">
@@ -1147,56 +263,31 @@
       <div class="referral-thar-emoji">🚙</div>
     </div>
 
-    <!-- campaign progress -->
     <div class="progress-section">
       <div class="progress-header">
         <div class="title">🎯 Campaign Progress</div>
-        <div class="percentage" id="progressPercent">78%</div>
+        <div class="percentage" id="progressPercent">0%</div>
       </div>
-      <div class="progress-bar-bg">
-        <div class="progress-bar-fill" id="progressBar" style="width: 78%;"></div>
-      </div>
-      <div class="progress-footer">
-        <span>Target: 1,00,00,000</span>
-        <span>›</span>
-      </div>
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+      <div class="progress-footer"><span>Target: 1,00,00,000</span><span>›</span></div>
     </div>
 
-    <!-- recent activity -->
     <div class="activity-bar">
       <div class="icon">📢</div>
-      <div class="text">
-        <strong>Rahul Kumar</strong> just joined the campaign! &nbsp;•&nbsp; <strong>Priya Singh</strong> won a reward!
-      </div>
+      <div class="text"><strong>Rahul Kumar</strong> just joined the campaign! • <strong>Priya Singh</strong> won a reward!</div>
       <div class="arrow">›</div>
     </div>
 
-    <!-- bottom nav -->
     <div class="bottom-nav">
-      <div class="nav-item active">
-        <div class="nav-icon">🏠</div>
-        <div class="nav-label">Home</div>
-      </div>
-      <div class="nav-item" onclick="openAuth()">
-        <div class="nav-icon">👤</div>
-        <div class="nav-label">My Profile</div>
-      </div>
-      <div class="nav-item center" onclick="openAuth()">
-        <div class="nav-icon">👑</div>
-        <div class="nav-label">Join Now</div>
-      </div>
-      <div class="nav-item" onclick="alert('Wallet feature coming soon!')">
-        <div class="nav-icon">👛</div>
-        <div class="nav-label">Wallet</div>
-      </div>
-      <div class="nav-item" onclick="alert('More options: Terms, Privacy, Support')">
-        <div class="nav-icon">•••</div>
-        <div class="nav-label">More</div>
-      </div>
+      <div class="nav-item active"><div class="nav-icon">🏠</div><div class="nav-label">Home</div></div>
+      <div class="nav-item" onclick="openAuth()"><div class="nav-icon">👤</div><div class="nav-label">My Profile</div></div>
+      <div class="nav-item center" onclick="openAuth()"><div class="nav-icon">👑</div><div class="nav-label">Join Now</div></div>
+      <div class="nav-item" onclick="alert('Wallet feature coming soon!')"><div class="nav-icon">👛</div><div class="nav-label">Wallet</div></div>
+      <div class="nav-item" onclick="alert('More options: Terms, Privacy, Support')"><div class="nav-icon">•••</div><div class="nav-label">More</div></div>
     </div>
   </div>
 
-  <!-- AUTH MODAL (original functionality preserved) -->
+  <!-- AUTH MODAL -->
   <div class="modal" id="authModal">
     <div class="modal-box">
       <button class="close" onclick="closeAuth()">×</button>
@@ -1204,39 +295,25 @@
       <p>Join completely free.</p>
       <div id="message" class="message"></div>
 
-      <!-- REGISTER -->
       <div class="auth-box active" id="registerBox">
-        <div class="form-group">
-          <label>Full Name</label>
-          <input id="regName" type="text" placeholder="Enter your name">
-        </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input id="regEmail" type="email" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-          <label>Phone Number</label>
-          <input id="regPhone" type="tel" placeholder="Enter your phone number" maxlength="15">
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input id="regPassword" type="password" placeholder="Minimum 6 characters">
-        </div>
-        <button class="btn primary" onclick="registerUser()">Create Free Account</button>
+        <div class="form-group"><label>Full Name</label><input id="regName" type="text" placeholder="Enter your name"></div>
+        <div class="form-group"><label>Email</label><input id="regEmail" type="email" placeholder="Enter email"></div>
+        <div class="form-group"><label>Phone Number</label><input id="regPhone" type="tel" placeholder="Enter your phone number" maxlength="15"></div>
+        <div class="form-group"><label>Password</label><input id="regPassword" type="password" placeholder="Minimum 6 characters"></div>
+        <button class="btn primary" id="registerBtn" onclick="registerUser()">
+          <span class="spinner"></span>
+          <span class="btn-text">Create Free Account</span>
+        </button>
         <div class="switch">Already registered? <span onclick="showLogin()">Login</span></div>
       </div>
 
-      <!-- LOGIN -->
       <div class="auth-box" id="loginBox">
-        <div class="form-group">
-          <label>Email</label>
-          <input id="loginEmail" type="email" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input id="loginPassword" type="password" placeholder="Enter password">
-        </div>
-        <button class="btn primary" onclick="loginUser()">Login</button>
+        <div class="form-group"><label>Email</label><input id="loginEmail" type="email" placeholder="Enter email"></div>
+        <div class="form-group"><label>Password</label><input id="loginPassword" type="password" placeholder="Enter password"></div>
+        <button class="btn primary" id="loginBtn" onclick="loginUser()">
+          <span class="spinner"></span>
+          <span class="btn-text">Login</span>
+        </button>
         <div class="switch">New user? <span onclick="showRegister()">Create Account</span></div>
       </div>
     </div>
@@ -1245,7 +322,7 @@
   <!-- IMPORTANT REFERRAL POPUP -->
   <div id="importantReferralPopup" class="important-referral-overlay">
     <div class="important-referral-card">
-      <button class="important-referral-close" onclick="closeImportantReferral()" aria-label="Close">&times;</button>
+      <button class="important-referral-close" onclick="closeImportantReferral()">&times;</button>
       <div class="important-referral-badge">⚠️ IMPORTANT • REFERRAL REWARD</div>
       <div class="important-referral-icon">🎁</div>
       <h2>Mahindra Thar <span>जीतने का मौका!</span></h2>
@@ -1259,7 +336,52 @@
     </div>
   </div>
 
-  <!-- FIREBASE + APP LOGIC -->
+  <!-- === SHARE MODAL (NEW) === -->
+  <div class="share-modal" id="shareModal" onclick="if(event.target===this) closeShareModal()">
+    <div class="share-sheet">
+      <div class="handle"></div>
+      <h3>Share Campaign</h3>
+      <p class="sub">Choose an app to share the campaign</p>
+
+      <div class="share-grid">
+        <div class="share-option whatsapp" onclick="shareTo('whatsapp')">
+          <div class="icon">💬</div>
+          <div class="label">WhatsApp</div>
+        </div>
+        <div class="share-option facebook" onclick="shareTo('facebook')">
+          <div class="icon">📘</div>
+          <div class="label">Facebook</div>
+        </div>
+        <div class="share-option twitter" onclick="shareTo('twitter')">
+          <div class="icon">🐦</div>
+          <div class="label">Twitter</div>
+        </div>
+        <div class="share-option telegram" onclick="shareTo('telegram')">
+          <div class="icon">✈️</div>
+          <div class="label">Telegram</div>
+        </div>
+        <div class="share-option email" onclick="shareTo('email')">
+          <div class="icon">✉️</div>
+          <div class="label">Email</div>
+        </div>
+        <div class="share-option sms" onclick="shareTo('sms')">
+          <div class="icon">💌</div>
+          <div class="label">SMS</div>
+        </div>
+        <div class="share-option copy" onclick="shareTo('copy')">
+          <div class="icon">📋</div>
+          <div class="label">Copy</div>
+        </div>
+        <div class="share-option more" onclick="shareTo('more')">
+          <div class="icon">⋯</div>
+          <div class="label">More</div>
+        </div>
+      </div>
+
+      <button class="share-close" onclick="closeShareModal()">Cancel</button>
+    </div>
+  </div>
+
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -1280,241 +402,42 @@
     const auth = getAuth(app);
     const db = getDatabase(app);
 
-    // Campaign default (kept from original)
+    const APK_DOWNLOAD_LINK = "https://github.com/saineek123/1-CRORE-GRAND/releases/download/v1.0.0/app-release.4.apk";
+    const SHARE_TITLE = "🎉 ₹1 CRORE GRAND Campaign";
+    const SHARE_TEXT = "🎉 ₹1 CRORE GRAND Campaign\n\n💰 ₹1 Crore Grand Prize\n🎁 Referral Rewards Available\n📲 Download APK: " + APK_DOWNLOAD_LINK;
+
     let campaign = {
       status: "active",
       targetParticipants: 10000000,
-      startDate: "",
-      endDate: "",
-      winnerStatus: "pending",
-      winnerName: "",
-      winnerParticipantId: "",
-      winnerDeclaredAt: "",
-      shareRewardThreshold: 10,
-      shareRewardText: "सबसे ज्यादा genuine & verified referrals करने वाले eligible participant को Mahindra Thar gift दिया जाएगा. अगर आपके referral से campaign winner बनता है, तो आपको भी Mahindra Thar gift मिलेगा."
+      shareRewardThreshold: 10
     };
 
-    // Load campaign from DB
+    // Campaign load
     onValue(ref(db, "campaign"), snapshot => {
-      if (snapshot.exists()) {
-        campaign = { ...campaign, ...snapshot.val() };
-      }
-      updateCampaignUI();
+      if (snapshot.exists()) campaign = { ...campaign, ...snapshot.val() };
     });
 
-    function updateCampaignUI() {
-      const status = campaign.status || "active";
-      // Update any campaign status UI if needed (we don't show status in new design but keep function)
-      // For progress target
-      const target = Number(campaign.targetParticipants || 10000000);
-      // Progress bar will be updated by participant count listener
-    }
-
-    // Real participant counter
+    // Participant counter
     onValue(ref(db, "publicParticipants"), snapshot => {
-      const participants = snapshot.exists() ? snapshot.val() : {};
-      const count = Object.keys(participants).length;
+      const count = snapshot.exists() ? Object.keys(snapshot.val()).length : 0;
       const counterEl = document.getElementById("participantCount");
-      const oldCount = Number(counterEl.dataset.count || 0);
-      counterEl.textContent = count.toLocaleString("en-IN");
-      counterEl.dataset.count = count;
-
+      if (counterEl) counterEl.textContent = count.toLocaleString("en-IN");
       const target = Number(campaign.targetParticipants || 10000000);
       let percentage = target > 0 ? (count / target) * 100 : 0;
       if (percentage > 100) percentage = 100;
       document.getElementById("progressBar").style.width = percentage + "%";
       document.getElementById("progressPercent").textContent = Math.round(percentage) + "%";
-    }, error => {
-      console.error("Participant counter error:", error);
+    }, () => {
       document.getElementById("participantCount").textContent = "0";
     });
 
-    // Auth state (keep original logic)
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        try {
-          const marker = await get(ref(db, "publicParticipants/" + user.uid));
-          if (!marker.exists()) {
-            await set(ref(db, "publicParticipants/" + user.uid), true);
-          }
-        } catch (error) {
-          console.error("Participant marker error:", error);
-        }
-        // Load user data (dashboard hidden in new design but keep logic)
-        loadUser(user);
-      } else {
-        const dashboard = document.getElementById("dashboard");
-        if (dashboard) dashboard.classList.remove("show");
-      }
-    });
-
-    // Register (updated with phone)
-    window.registerUser = async function () {
-      const name = document.getElementById("regName").value.trim();
-      const email = document.getElementById("regEmail").value.trim();
-      const phone = document.getElementById("regPhone").value.trim();
-      const password = document.getElementById("regPassword").value;
-
-      if (name.length < 2) { message("Please enter your full name.", "error"); return; }
-      if (!email) { message("Please enter your email.", "error"); return; }
-      if (!phone || phone.length < 10) { message("Please enter a valid phone number.", "error"); return; }
-      if (password.length < 6) { message("Password must contain at least 6 characters.", "error"); return; }
-      if (campaign.status !== "active") { message("Campaign is currently " + campaign.status + ".", "error"); return; }
-
-      try {
-        const result = await createUserWithEmailAndPassword(auth, email, password);
-        const user = result.user;
-        await updateProfile(user, { displayName: name });
-        const participantId = createParticipantId();
-        const userData = {
-          uid: user.uid,
-          name: name,
-          email: email,
-          phone: phone,
-          participantId: participantId,
-          joinedAt: new Date().toISOString(),
-          shareCount: 0,
-          status: "active"
-        };
-        await set(ref(db, "users/" + user.uid), userData);
-        try {
-          const markerRef = ref(db, "publicParticipants/" + user.uid);
-          const markerSnapshot = await get(markerRef);
-          if (!markerSnapshot.exists()) {
-            await set(markerRef, true);
-          }
-        } catch (markerError) {
-          console.error("Participant marker error:", markerError);
-        }
-        message("Account created successfully!", "success");
-        setTimeout(closeAuth, 800);
-      } catch (error) {
-        console.error(error);
-        let text = "Registration failed.";
-        if (error.code === "auth/email-already-in-use") text = "This email is already registered.";
-        if (error.code === "auth/invalid-email") text = "Invalid email address.";
-        message(text, "error");
-      }
-    };
-
-    // Login
-    window.loginUser = async function () {
-      const email = document.getElementById("loginEmail").value.trim();
-      const password = document.getElementById("loginPassword").value;
-      if (!email || !password) { message("Enter email and password.", "error"); return; }
-      try {
-        await signInWithEmailAndPassword(auth, email, password);
-        message("Login successful!", "success");
-        setTimeout(closeAuth, 500);
-      } catch (error) {
-        message("Invalid email or password.", "error");
-      }
-    };
-
-    // Load user (keep original)
-    async function loadUser(user) {
-      const snapshot = await get(ref(db, "users/" + user.uid));
-      if (!snapshot.exists()) return;
-      const data = snapshot.val();
-      const dashboard = document.getElementById("dashboard");
-      if (dashboard) {
-        dashboard.classList.add("show");
-        document.getElementById("participantId").textContent = data.participantId || "—";
-        const currentShareCount = Number(data.shareCount || 0);
-        document.getElementById("shareCount").textContent = currentShareCount;
-        if (typeof updateShareRewardUI === "function") updateShareRewardUI(currentShareCount);
-        if (data.joinedAt) {
-          document.getElementById("joinedDate").textContent = new Date(data.joinedAt).toLocaleDateString("en-IN");
-        }
-      }
+    // Button loading
+    function setLoading(btnId, isLoading) {
+      const btn = document.getElementById(btnId);
+      if (!btn) return;
+      btn.classList.toggle("loading", isLoading);
+      btn.disabled = isLoading;
     }
-
-    // Participant ID
-    function createParticipantId() {
-      return "CAMP-" + Math.random().toString(36).substring(2, 9).toUpperCase();
-    }
-
-    // Share
-    const APK_DOWNLOAD_LINK = "https://github.com/saineek123/1-CRORE-GRAND/releases/download/v1.0.0/app-release.4.apk";
-
-    window.shareCampaign = async function () {
-      const user = auth.currentUser;
-      if (user) {
-        try {
-          await update(ref(db, "users/" + user.uid), { shareCount: increment(1) });
-          const shareSnapshot = await get(ref(db, "users/" + user.uid + "/shareCount"));
-          const newShareCount = shareSnapshot.exists() ? Number(shareSnapshot.val() || 0) : 0;
-          const shareEl = document.getElementById("shareCount");
-          if (shareEl) shareEl.textContent = newShareCount;
-          if (typeof updateShareRewardUI === "function") updateShareRewardUI(newShareCount);
-        } catch (error) {
-          console.error("Share count update error:", error);
-        }
-      }
-      const text = "🎉 ₹1 CRORE GRAND Campaign\n\n" + "💰 ₹1 Crore Grand Prize\n" + "🎁 Referral Rewards Available\n" + "📲 APK Download: " + APK_DOWNLOAD_LINK;
-      if (navigator.share) {
-        try {
-          await navigator.share({ title: "₹1 Crore Grand Campaign", text: text, url: APK_DOWNLOAD_LINK });
-        } catch (error) { }
-      } else {
-        try {
-          await navigator.clipboard.writeText(text);
-          alert("APK download link copied!");
-        } catch (error) {
-          prompt("APK download link:", APK_DOWNLOAD_LINK);
-        }
-      }
-    };
-
-    // WhatsApp
-    window.shareWhatsApp = async function () {
-      const user = auth.currentUser;
-      if (user) {
-        try {
-          await update(ref(db, "users/" + user.uid), { shareCount: increment(1) });
-        } catch (error) {
-          console.error("WhatsApp share count error:", error);
-        }
-      }
-      const text = "🎉 *₹1 CRORE GRAND Campaign*\n\n" + "💰 ₹1 Crore Grand Prize\n" + "🎁 Referral Rewards Available\n\n" + "📲 *Download APK:*\n" + APK_DOWNLOAD_LINK;
-      window.open("https://wa.me/?text=" + encodeURIComponent(text), "_blank");
-    };
-
-    // Copy link
-    window.copyLink = async function () {
-      const url = window.location.href;
-      try {
-        await navigator.clipboard.writeText(url);
-        alert("Campaign link copied!");
-      } catch (error) {
-        prompt("Copy this link:", url);
-      }
-    };
-
-    // Logout
-    window.logoutUser = async function () {
-      await signOut(auth);
-    };
-
-    // Auth modal
-    window.openAuth = function () {
-      document.getElementById("authModal").classList.add("show");
-    };
-    window.closeAuth = function () {
-      document.getElementById("authModal").classList.remove("show");
-    };
-    window.showLogin = function () {
-      document.getElementById("registerBox").classList.remove("active");
-      document.getElementById("loginBox").classList.add("active");
-      document.getElementById("authTitle").textContent = "Login";
-      clearMessage();
-    };
-    window.showRegister = function () {
-      document.getElementById("loginBox").classList.remove("active");
-      document.getElementById("registerBox").classList.add("active");
-      document.getElementById("authTitle").textContent = "Create Account";
-      clearMessage();
-    };
 
     // Message helpers
     function message(text, type) {
@@ -1528,24 +451,215 @@
       box.className = "message";
     }
 
-    // Popup close
-    window.closeImportantReferral = function () {
-      const popup = document.getElementById("importantReferralPopup");
-      if (popup) popup.style.display = "none";
-      document.body.classList.remove("referral-popup-open");
-    };
-    window.addEventListener("load", () => {
-      const popup = document.getElementById("importantReferralPopup");
-      if (popup) {
-        popup.style.display = "flex";
-        document.body.classList.add("referral-popup-open");
+    // Auth state
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        get(ref(db, "publicParticipants/" + user.uid)).then(marker => {
+          if (!marker.exists()) {
+            set(ref(db, "publicParticipants/" + user.uid), true).catch(console.error);
+          }
+        }).catch(console.error);
       }
     });
 
-    // Expose functions to global for inline onclick
-    window.updateShareRewardUI = function (shareCount) {
-      // Dummy to prevent errors — original dashboard hidden
+    // Register
+    window.registerUser = async function () {
+      const name = document.getElementById("regName").value.trim();
+      const email = document.getElementById("regEmail").value.trim();
+      const phone = document.getElementById("regPhone").value.trim();
+      const password = document.getElementById("regPassword").value;
+
+      if (name.length < 2) return message("Please enter your full name.", "error");
+      if (!email) return message("Please enter your email.", "error");
+      if (!phone || phone.length < 10) return message("Please enter a valid phone number.", "error");
+      if (password.length < 6) return message("Password must contain at least 6 characters.", "error");
+
+      setLoading("registerBtn", true);
+      clearMessage();
+
+      try {
+        const result = await createUserWithEmailAndPassword(auth, email, password);
+        const user = result.user;
+        message("Account created! Setting up profile...", "success");
+
+        const participantId = "CAMP-" + Math.random().toString(36).substring(2, 9).toUpperCase();
+        const userData = {
+          uid: user.uid, name, email, phone,
+          participantId,
+          joinedAt: new Date().toISOString(),
+          shareCount: 0, status: "active"
+        };
+
+        updateProfile(user, { displayName: name }).catch(console.error);
+        set(ref(db, "users/" + user.uid), userData).catch(console.error);
+        set(ref(db, "publicParticipants/" + user.uid), true).catch(console.error);
+
+        setTimeout(() => {
+          message("Account created successfully! 🎉", "success");
+          setLoading("registerBtn", false);
+          setTimeout(closeAuth, 700);
+        }, 400);
+
+      } catch (error) {
+        console.error(error);
+        setLoading("registerBtn", false);
+        let text = "Registration failed.";
+        if (error.code === "auth/email-already-in-use") text = "This email is already registered.";
+        if (error.code === "auth/invalid-email") text = "Invalid email address.";
+        if (error.code === "auth/weak-password") text = "Password is too weak.";
+        if (error.code === "auth/network-request-failed") text = "Network error. Check internet.";
+        message(text, "error");
+      }
     };
+
+    // Login
+    window.loginUser = async function () {
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value;
+
+      if (!email || !password) return message("Enter email and password.", "error");
+
+      setLoading("loginBtn", true);
+      clearMessage();
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        message("Login successful! 🎉", "success");
+        setLoading("loginBtn", false);
+        setTimeout(closeAuth, 500);
+      } catch (error) {
+        console.error(error);
+        setLoading("loginBtn", false);
+        let text = "Invalid email or password.";
+        if (error.code === "auth/network-request-failed") text = "Network error. Check internet.";
+        if (error.code === "auth/too-many-requests") text = "Too many attempts. Try again later.";
+        message(text, "error");
+      }
+    };
+
+    window.logoutUser = async function () {
+      try { await signOut(auth); } catch (e) { console.error(e); }
+    };
+
+    // === SHARE LOGIC ===
+    window.shareCampaign = function () {
+      // Try native share first (mobile me best experience)
+      if (navigator.share) {
+        navigator.share({
+          title: SHARE_TITLE,
+          text: SHARE_TEXT,
+          url: APK_DOWNLOAD_LINK
+        }).then(() => {
+          // Count share
+          const user = auth.currentUser;
+          if (user) update(ref(db, "users/" + user.uid), { shareCount: increment(1) }).catch(console.error);
+        }).catch((err) => {
+          if (err.name !== "AbortError") {
+            // Native share fail → custom modal
+            openShareModal();
+          }
+        });
+      } else {
+        // No native share → custom modal
+        openShareModal();
+      }
+    };
+
+    window.openShareModal = function () {
+      document.getElementById("shareModal").classList.add("show");
+    };
+
+    window.closeShareModal = function () {
+      document.getElementById("shareModal").classList.remove("show");
+    };
+
+    window.shareTo = async function (platform) {
+      const url = encodeURIComponent(APK_DOWNLOAD_LINK);
+      const text = encodeURIComponent(SHARE_TEXT);
+      const title = encodeURIComponent(SHARE_TITLE);
+      let shareUrl = "";
+
+      switch (platform) {
+        case "whatsapp":
+          shareUrl = "https://wa.me/?text=" + text;
+          break;
+        case "facebook":
+          shareUrl = "https://www.facebook.com/sharer/sharer.php?u=" + url + "&quote=" + text;
+          break;
+        case "twitter":
+          shareUrl = "https://twitter.com/intent/tweet?text=" + text + "&url=" + url;
+          break;
+        case "telegram":
+          shareUrl = "https://t.me/share/url?url=" + url + "&text=" + text;
+          break;
+        case "email":
+          shareUrl = "mailto:?subject=" + title + "&body=" + text;
+          break;
+        case "sms":
+          shareUrl = "sms:?body=" + text;
+          break;
+        case "copy":
+          try {
+            await navigator.clipboard.writeText(SHARE_TEXT + "\n" + APK_DOWNLOAD_LINK);
+            alert("✅ Link copied to clipboard!");
+            countShare();
+          } catch {
+            prompt("Copy this:", SHARE_TEXT + "\n" + APK_DOWNLOAD_LINK);
+          }
+          closeShareModal();
+          return;
+        case "more":
+          if (navigator.share) {
+            try {
+              await navigator.share({ title: SHARE_TITLE, text: SHARE_TEXT, url: APK_DOWNLOAD_LINK });
+              countShare();
+            } catch {}
+          } else {
+            alert("Your browser doesn't support native share.");
+          }
+          closeShareModal();
+          return;
+      }
+
+      if (shareUrl) {
+        window.open(shareUrl, "_blank", "noopener");
+        countShare();
+      }
+      closeShareModal();
+    };
+
+    function countShare() {
+      const user = auth.currentUser;
+      if (user) update(ref(db, "users/" + user.uid), { shareCount: increment(1) }).catch(console.error);
+    }
+
+    // Auth modal
+    window.openAuth = () => document.getElementById("authModal").classList.add("show");
+    window.closeAuth = () => document.getElementById("authModal").classList.remove("show");
+    window.showLogin = () => {
+      document.getElementById("registerBox").classList.remove("active");
+      document.getElementById("loginBox").classList.add("active");
+      document.getElementById("authTitle").textContent = "Login";
+      clearMessage();
+    };
+    window.showRegister = () => {
+      document.getElementById("loginBox").classList.remove("active");
+      document.getElementById("registerBox").classList.add("active");
+      document.getElementById("authTitle").textContent = "Create Account";
+      clearMessage();
+    };
+
+    // Popup
+    window.closeImportantReferral = () => {
+      const p = document.getElementById("importantReferralPopup");
+      if (p) p.style.display = "none";
+    };
+    window.addEventListener("load", () => {
+      const p = document.getElementById("importantReferralPopup");
+      if (p) p.style.display = "flex";
+    });
+
+    window.updateShareRewardUI = () => {};
   </script>
 </body>
 </html>
