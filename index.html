@@ -1431,21 +1431,26 @@ async function(){
             status:"active"
         };
 
-        /* Save private user data and a public marker together. */
-        const updates = {};
-
-        updates[
-            "users/" + user.uid
-        ] = userData;
-
-        updates[
-            "publicParticipants/" + user.uid
-        ] = true;
-
-        await update(
-            ref(db),
-            updates
+        /* Save private user data first.
+           The public participant marker is written separately so an
+           already-existing marker cannot make the whole registration
+           fail with PERMISSION_DENIED. */
+        await set(
+            ref(db,"users/" + user.uid),
+            userData
         );
+
+        try{
+            const markerRef = ref(db,"publicParticipants/" + user.uid);
+            const markerSnapshot = await get(markerRef);
+
+            if(!markerSnapshot.exists()){
+                await set(markerRef, true);
+            }
+        }catch(markerError){
+            console.error("Participant marker error:", markerError);
+            // Account creation is already complete.
+        }
 
 
         message(
