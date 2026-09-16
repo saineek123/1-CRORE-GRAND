@@ -1758,76 +1758,53 @@ function createParticipantId(){
    SHARE
 ========================= */
 
+const APK_DOWNLOAD_LINK = "https://github.com/saineek123/1-CRORE-GRAND/releases/download/v1.0.0/app-release.4.apk";
+
 window.shareCampaign =
 async function(){
 
-    const user =
-        auth.currentUser;
-
+    const user = auth.currentUser;
 
     if(user){
+        try{
+            await update(
+                ref(db,"users/"+user.uid),
+                { shareCount: increment(1) }
+            );
 
-        await update(
-            ref(db,"users/"+user.uid),
-            {
-                shareCount:
-                    increment(1)
-            }
-        );
-
-        const shareSnapshot = await get(ref(db,"users/"+user.uid+"/shareCount"));
-        const newShareCount = shareSnapshot.exists() ? Number(shareSnapshot.val() || 0) : 0;
-        document.getElementById("shareCount").textContent = newShareCount;
-        updateShareRewardUI(newShareCount);
-
+            const shareSnapshot = await get(ref(db,"users/"+user.uid+"/shareCount"));
+            const newShareCount = shareSnapshot.exists() ? Number(shareSnapshot.val() || 0) : 0;
+            const shareEl = document.getElementById("shareCount");
+            if(shareEl) shareEl.textContent = newShareCount;
+            if(typeof updateShareRewardUI === "function") updateShareRewardUI(newShareCount);
+        }catch(error){
+            console.error("Share count update error:", error);
+        }
     }
-
-
-    const url =
-        window.location.href;
-
 
     const text =
-        "🎁 Join the FREE ₹1 Crore Campaign!\n\n" +
-        "₹0 entry required.\n\n" +
-        url;
-
+        "🎉 ₹1 CRORE GRAND Campaign\n\n" +
+        "💰 ₹1 Crore Grand Prize\n" +
+        "🎁 Referral Rewards Available\n" +
+        "📲 APK Download: " + APK_DOWNLOAD_LINK;
 
     if(navigator.share){
-
         try{
-
             await navigator.share({
-
-                title:
-                    "₹1 Crore Campaign",
-
-                text:
-                    text,
-
-                url:
-                    url
-
+                title: "₹1 Crore Grand Campaign",
+                text: text,
+                url: APK_DOWNLOAD_LINK
             });
-
+        }catch(error){}
+    }else{
+        try{
+            await navigator.clipboard.writeText(text);
+            alert("APK download link copied!");
+        }catch(error){
+            prompt("APK download link:", APK_DOWNLOAD_LINK);
         }
-        catch(error){}
-
     }
-    else{
-
-        await navigator.clipboard
-        .writeText(text);
-
-        alert(
-            "Campaign link copied!"
-        );
-
-    }
-
 };
-
-
 
 /* =========================
    WHATSAPP
@@ -1836,42 +1813,31 @@ async function(){
 window.shareWhatsApp =
 async function(){
 
-    const user =
-        auth.currentUser;
-
+    const user = auth.currentUser;
 
     if(user){
-
-        await update(
-            ref(db,"users/"+user.uid),
-            {
-                shareCount:
-                    increment(1)
-            }
-        );
-
+        try{
+            await update(
+                ref(db,"users/"+user.uid),
+                { shareCount: increment(1) }
+            );
+        }catch(error){
+            console.error("WhatsApp share count error:", error);
+        }
     }
 
-
-    const url =
-        window.location.href;
-
-
     const text =
-        "🎁 FREE ₹1 Crore Campaign!\n\n" +
-        "Join completely free.\n" +
-        "₹0 entry.\n\n" +
-        url;
-
+        "🎉 *₹1 CRORE GRAND Campaign*\n\n" +
+        "💰 ₹1 Crore Grand Prize\n" +
+        "🎁 Referral Rewards Available\n\n" +
+        "📲 *Download APK:*\n" +
+        APK_DOWNLOAD_LINK;
 
     window.open(
-        "https://wa.me/?text="+
-        encodeURIComponent(text),
+        "https://wa.me/?text=" + encodeURIComponent(text),
         "_blank"
     );
-
 };
-
 
 
 /* =========================
