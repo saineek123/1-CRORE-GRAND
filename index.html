@@ -1152,27 +1152,26 @@ function updateCampaignUI(){
 
 
 /* =========================
-   REAL USER COUNTER
+   REAL PUBLIC PARTICIPANT COUNTER
+   Reads only publicParticipants, not private users data.
 ========================= */
 
 onValue(
-    ref(db,"users"),
+    ref(db,"publicParticipants"),
     snapshot=>{
 
-        const users =
+        const participants =
             snapshot.exists()
             ? snapshot.val()
             : {};
 
         const count =
-            Object.keys(users).length;
-
+            Object.keys(participants).length;
 
         document.getElementById(
             "participantCount"
         ).textContent =
             count.toLocaleString("en-IN");
-
 
         const target =
             Number(
@@ -1180,26 +1179,28 @@ onValue(
                 10000000
             );
 
-
         let percentage =
             target > 0
             ? (count / target) * 100
             : 0;
 
-
         if(percentage > 100){
             percentage = 100;
         }
-
 
         document.getElementById(
             "progressBar"
         ).style.width =
             percentage + "%";
 
+    },
+    error=>{
+        console.error("Participant counter error:",error);
+        document.getElementById(
+            "participantCount"
+        ).textContent = "0";
     }
 );
-
 
 
 /* =========================
@@ -1211,6 +1212,23 @@ onAuthStateChanged(
     async(user)=>{
 
         if(user){
+
+            /* Add marker for older accounts on their next login. */
+            try{
+                const marker = await get(
+                    ref(db,"publicParticipants/"+user.uid)
+                );
+
+                if(!marker.exists()){
+                    await set(
+                        ref(db,"publicParticipants/"+user.uid),
+                        true
+                    );
+                }
+            }
+            catch(error){
+                console.error("Participant marker error:",error);
+            }
 
             loadUser(user);
 
@@ -1329,28 +1347,30 @@ async function(){
         const participantId =
             createParticipantId();
 
+        const userData = {
+            uid:user.uid,
+            name:name,
+            email:email,
+            participantId:participantId,
+            joinedAt:new Date().toISOString(),
+            shareCount:0,
+            status:"active"
+        };
 
-        await set(
-            ref(db,"users/"+user.uid),
-            {
+        /* Save private user data and a public marker together. */
+        const updates = {};
 
-                uid:user.uid,
+        updates[
+            "users/" + user.uid
+        ] = userData;
 
-                name:name,
+        updates[
+            "publicParticipants/" + user.uid
+        ] = true;
 
-                email:email,
-
-                participantId:
-                    participantId,
-
-                joinedAt:
-                    new Date().toISOString(),
-
-                shareCount:0,
-
-                status:"active"
-
-            }
+        await update(
+            ref(db),
+            updates
         );
 
 
