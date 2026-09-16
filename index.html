@@ -2141,7 +2141,7 @@ revealCards.forEach(el=>revealObserver.observe(el));
 
 
 /* IMPORTANT REFERRAL POPUP — shows on every page load */
-function closeImportantReferral(){
+window.closeImportantReferral = function(){
   const popup=document.getElementById("importantReferralPopup");
   if(popup) popup.style.display="none";
   document.body.classList.remove("referral-popup-open");
