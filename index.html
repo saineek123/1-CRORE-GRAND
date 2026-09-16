@@ -459,6 +459,75 @@ button{
         font-size:12px
     }
 }
+
+/* ===== PREMIUM CAMPAIGN ANIMATIONS ===== */
+html{scroll-behavior:smooth}
+body{overflow-x:hidden;background:radial-gradient(circle at 50% -10%,#eaf0ff 0,#f7f9ff 35%,#f4f7ff 70%)}
+body:before,body:after{content:"";position:fixed;z-index:-1;border-radius:50%;filter:blur(2px);pointer-events:none}
+body:before{width:260px;height:260px;left:-130px;top:180px;background:rgba(21,94,239,.08);animation:floatBlob 8s ease-in-out infinite}
+body:after{width:220px;height:220px;right:-110px;top:520px;background:rgba(113,56,255,.08);animation:floatBlob 10s ease-in-out infinite reverse}
+.header{position:relative;overflow:hidden;background:linear-gradient(135deg,#0d47d9 0%,#155eef 42%,#7138ff 100%);box-shadow:0 18px 55px rgba(42,73,180,.25)}
+.header:before{content:"";position:absolute;inset:-50%;background:conic-gradient(from 0deg,transparent 0 30%,rgba(255,255,255,.13) 38%,transparent 46% 100%);animation:headerSpin 14s linear infinite}
+.header:after{content:"";position:absolute;left:-10%;right:-10%;bottom:-75px;height:150px;background:rgba(255,255,255,.07);border-radius:50%;box-shadow:0 -20px 80px rgba(255,255,255,.06);animation:wave 7s ease-in-out infinite}
+.nav,.hero{position:relative;z-index:2}
+.logo{animation:logoFloat 3.5s ease-in-out infinite;text-shadow:0 4px 18px rgba(0,0,0,.15)}
+.nav-btn{transition:.25s;backdrop-filter:blur(10px)}
+.nav-btn:hover{transform:translateY(-2px) scale(1.03);background:rgba(255,255,255,.24)}
+.hero{animation:heroIn .8s cubic-bezier(.2,.8,.2,1) both}
+.badge{animation:badgePulse 2.5s ease-in-out infinite;box-shadow:0 0 0 0 rgba(255,255,255,.2)}
+.hero h1{letter-spacing:-1.5px;text-shadow:0 8px 30px rgba(0,0,0,.12)}
+.hero h1 span{display:inline-block;animation:prizeGlow 2.2s ease-in-out infinite;text-shadow:0 0 25px rgba(255,227,110,.35)}
+.container{animation:contentIn 1s .1s both}
+.card{position:relative;overflow:hidden;border:1px solid rgba(21,94,239,.055);transition:transform .3s ease,box-shadow .3s ease}
+.card:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.55),transparent 70%);transform:translateX(-120%);transition:transform .7s}
+.card:hover{transform:translateY(-4px);box-shadow:0 18px 50px rgba(25,50,100,.13)}
+.card:hover:before{transform:translateX(120%)}
+.counter-card{box-shadow:0 18px 55px rgba(21,94,239,.13);animation:cardFloat 5s ease-in-out infinite}
+.status{animation:statusBlink 2s ease-in-out infinite}
+.counter{letter-spacing:1px;text-shadow:0 6px 25px rgba(21,94,239,.18);transition:transform .25s}
+.counter.bump{animation:counterBump .55s ease}
+.progress{box-shadow:inset 0 2px 8px rgba(20,40,90,.08)}
+.progress-bar{position:relative;overflow:hidden;box-shadow:0 0 16px rgba(21,94,239,.28)}
+.progress-bar:after{content:"";position:absolute;top:0;left:-35%;width:35%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);animation:progressShine 1.7s linear infinite}
+.btn{position:relative;overflow:hidden;transition:transform .2s ease,box-shadow .2s ease}
+.btn:before{content:"";position:absolute;top:0;left:-110%;width:70%;height:100%;transform:skewX(-20deg);background:rgba(255,255,255,.25);transition:left .55s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(21,94,239,.22)}
+.btn:hover:before{left:135%}
+.primary{box-shadow:0 8px 22px rgba(21,94,239,.28);animation:ctaGlow 2.2s ease-in-out infinite}
+.primary:active{transform:scale(.98)}
+.step{transition:.3s;animation:stepIn .7s both}
+.step:nth-child(1){animation-delay:.12s}.step:nth-child(2){animation-delay:.22s}.step:nth-child(3){animation-delay:.32s}
+.step:hover{transform:translateY(-6px);box-shadow:0 14px 30px rgba(21,94,239,.09)}
+.step-number{transition:.3s;box-shadow:0 7px 18px rgba(21,94,239,.1)}
+.step:hover .step-number{transform:rotate(8deg) scale(1.08)}
+.share-buttons button{transition:.25s}.share-buttons button:hover{transform:translateY(-3px);box-shadow:0 9px 20px rgba(0,0,0,.1)}
+.modal{backdrop-filter:blur(7px)}
+.modal.show .modal-box{animation:modalIn .4s cubic-bezier(.2,.8,.2,1)}
+.modal-box{box-shadow:0 25px 80px rgba(8,25,70,.25)}
+.form-group input{transition:.2s;box-shadow:0 2px 8px rgba(20,40,80,.025)}
+.form-group input:focus{transform:translateY(-1px);box-shadow:0 6px 18px rgba(21,94,239,.1)}
+.sponsor-box{animation:sponsorGlow 4s ease-in-out infinite}
+@keyframes heroIn{from{opacity:0;transform:translateY(24px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes contentIn{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:none}}
+@keyframes headerSpin{to{transform:rotate(360deg)}}
+@keyframes wave{0%,100%{transform:translateX(-2%) scaleX(1)}50%{transform:translateX(2%) scaleX(1.04)}}
+@keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@keyframes badgePulse{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.12)}50%{box-shadow:0 0 0 8px rgba(255,255,255,0)}}
+@keyframes prizeGlow{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
+@keyframes cardFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes statusBlink{0%,100%{filter:brightness(1)}50%{filter:brightness(1.08)}}
+@keyframes counterBump{0%{transform:scale(1)}45%{transform:scale(1.13)}100%{transform:scale(1)}}
+@keyframes progressShine{to{left:130%}}
+@keyframes ctaGlow{0%,100%{box-shadow:0 8px 22px rgba(21,94,239,.24)}50%{box-shadow:0 10px 30px rgba(113,56,255,.34)}}
+@keyframes stepIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+@keyframes modalIn{from{opacity:0;transform:translateY(25px) scale(.95)}to{opacity:1;transform:none}}
+@keyframes sponsorGlow{0%,100%{box-shadow:0 0 0 rgba(255,196,0,0)}50%{box-shadow:0 8px 35px rgba(255,196,0,.12)}}
+@keyframes floatBlob{0%,100%{transform:translate(0,0)}50%{transform:translate(25px,-20px)}}
+@media(max-width:650px){
+ .header{padding-bottom:78px}.hero{margin-top:38px}.hero h1{font-size:34px;letter-spacing:-1px}.hero p{font-size:15px}.container{margin-top:-44px}.card{padding:20px;border-radius:21px}.counter-card{animation:none}.counter{font-size:35px}.btn{padding:15px}.step:hover,.card:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
 </style>
 </head>
 
@@ -1168,10 +1237,15 @@ onValue(
         const count =
             Object.keys(participants).length;
 
-        document.getElementById(
-            "participantCount"
-        ).textContent =
-            count.toLocaleString("en-IN");
+        const counterEl = document.getElementById("participantCount");
+        const oldCount = Number(counterEl.dataset.count || 0);
+        counterEl.textContent = count.toLocaleString("en-IN");
+        counterEl.dataset.count = count;
+        if(count !== oldCount){
+            counterEl.classList.remove("bump");
+            void counterEl.offsetWidth;
+            counterEl.classList.add("bump");
+        }
 
         const target =
             Number(
@@ -1923,6 +1997,27 @@ function clearMessage(){
         "message";
 
 }
+
+/* =========================
+   SCROLL REVEAL
+========================= */
+const revealCards = document.querySelectorAll("main .card");
+revealCards.forEach((el,i)=>{
+    el.style.opacity = "0";
+    el.style.transform = "translateY(18px)";
+    el.style.transition = "opacity .65s ease, transform .65s ease";
+    el.style.transitionDelay = Math.min(i*70,350)+"ms";
+});
+const revealObserver = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+            revealObserver.unobserve(entry.target);
+        }
+    });
+},{threshold:.08});
+revealCards.forEach(el=>revealObserver.observe(el));
 
 </script>
 
