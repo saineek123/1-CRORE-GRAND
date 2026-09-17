@@ -245,8 +245,9 @@
       </div>
     </div>
 
+    <!-- ✅ ACTION GRID — Rewards → reward.html -->
     <div class="action-grid">
-      <div class="action-item" onclick="alert('Rewards section coming soon!')"><div class="icon-box">🎁</div><div class="label">Rewards</div></div>
+      <div class="action-item" onclick="window.location.href='reward.html'"><div class="icon-box">🎁</div><div class="label">Rewards</div></div>
       <div class="action-item" onclick="shareCampaign()"><div class="icon-box">📤</div><div class="label">Share</div></div>
       <div class="action-item" onclick="alert('Invite friends and earn rewards!')"><div class="icon-box">👥</div><div class="label">Invite</div></div>
       <div class="action-item" onclick="alert('Leaderboard will be available soon!')"><div class="icon-box">🏆</div><div class="label">Leaderboard</div></div>
@@ -278,12 +279,13 @@
       <div class="arrow">›</div>
     </div>
 
+    <!-- ✅ BOTTOM NAV — Wallet & Rewards clickable -->
     <div class="bottom-nav">
-      <div class="nav-item active"><div class="nav-icon">🏠</div><div class="nav-label">Home</div></div>
+      <div class="nav-item active" onclick="window.location.href='index.html'"><div class="nav-icon">🏠</div><div class="nav-label">Home</div></div>
       <div class="nav-item" onclick="openAuth()"><div class="nav-icon">👤</div><div class="nav-label">My Profile</div></div>
       <div class="nav-item center" onclick="openAuth()"><div class="nav-icon">👑</div><div class="nav-label">Join Now</div></div>
-      <div class="nav-item" onclick="alert('Wallet feature coming soon!')"><div class="nav-icon">👛</div><div class="nav-label">Wallet</div></div>
-      <div class="nav-item" onclick="alert('More options: Terms, Privacy, Support')"><div class="nav-icon">•••</div><div class="nav-label">More</div></div>
+      <div class="nav-item" onclick="window.location.href='wallet.html'"><div class="nav-icon">👛</div><div class="nav-label">Wallet</div></div>
+      <div class="nav-item" onclick="window.location.href='reward.html'"><div class="nav-icon">🎁</div><div class="nav-label">Rewards</div></div>
     </div>
   </div>
 
@@ -336,7 +338,7 @@
     </div>
   </div>
 
-  <!-- === SHARE MODAL (NEW) === -->
+  <!-- === SHARE MODAL === -->
   <div class="share-modal" id="shareModal" onclick="if(event.target===this) closeShareModal()">
     <div class="share-sheet">
       <div class="handle"></div>
@@ -412,12 +414,10 @@
       shareRewardThreshold: 10
     };
 
-    // Campaign load
     onValue(ref(db, "campaign"), snapshot => {
       if (snapshot.exists()) campaign = { ...campaign, ...snapshot.val() };
     });
 
-    // Participant counter
     onValue(ref(db, "publicParticipants"), snapshot => {
       const count = snapshot.exists() ? Object.keys(snapshot.val()).length : 0;
       const counterEl = document.getElementById("participantCount");
@@ -431,7 +431,6 @@
       document.getElementById("participantCount").textContent = "0";
     });
 
-    // Button loading
     function setLoading(btnId, isLoading) {
       const btn = document.getElementById(btnId);
       if (!btn) return;
@@ -439,7 +438,6 @@
       btn.disabled = isLoading;
     }
 
-    // Message helpers
     function message(text, type) {
       const box = document.getElementById("message");
       box.textContent = text;
@@ -451,7 +449,6 @@
       box.className = "message";
     }
 
-    // Auth state
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         get(ref(db, "publicParticipants/" + user.uid)).then(marker => {
@@ -462,7 +459,6 @@
       }
     });
 
-    // Register
     window.registerUser = async function () {
       const name = document.getElementById("regName").value.trim();
       const email = document.getElementById("regEmail").value.trim();
@@ -512,7 +508,6 @@
       }
     };
 
-    // Login
     window.loginUser = async function () {
       const email = document.getElementById("loginEmail").value.trim();
       const password = document.getElementById("loginPassword").value;
@@ -541,26 +536,21 @@
       try { await signOut(auth); } catch (e) { console.error(e); }
     };
 
-    // === SHARE LOGIC ===
     window.shareCampaign = function () {
-      // Try native share first (mobile me best experience)
       if (navigator.share) {
         navigator.share({
           title: SHARE_TITLE,
           text: SHARE_TEXT,
           url: APK_DOWNLOAD_LINK
         }).then(() => {
-          // Count share
           const user = auth.currentUser;
           if (user) update(ref(db, "users/" + user.uid), { shareCount: increment(1) }).catch(console.error);
         }).catch((err) => {
           if (err.name !== "AbortError") {
-            // Native share fail → custom modal
             openShareModal();
           }
         });
       } else {
-        // No native share → custom modal
         openShareModal();
       }
     };
@@ -633,7 +623,6 @@
       if (user) update(ref(db, "users/" + user.uid), { shareCount: increment(1) }).catch(console.error);
     }
 
-    // Auth modal
     window.openAuth = () => document.getElementById("authModal").classList.add("show");
     window.closeAuth = () => document.getElementById("authModal").classList.remove("show");
     window.showLogin = () => {
@@ -649,7 +638,6 @@
       clearMessage();
     };
 
-    // Popup
     window.closeImportantReferral = () => {
       const p = document.getElementById("importantReferralPopup");
       if (p) p.style.display = "none";
