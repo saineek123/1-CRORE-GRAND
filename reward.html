@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Rewards • ₹1 Crore Grand</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif; }
+
+    body {
+      background: #0b0f1c;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      color: #fff;
+    }
+
+    .app-container {
+      max-width: 430px;
+      width: 100%;
+      background: radial-gradient(circle at 20% 0%, #10203a, #050a14 90%);
+      border-radius: 48px;
+      padding: 18px 16px 12px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,215,0,0.15);
+      border: 1px solid rgba(255,215,0,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* header */
+    .app-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 0 12px;
+    }
+    .logo-group { display: flex; align-items: center; gap: 6px; }
+    .crown-icon { font-size: 30px; filter: drop-shadow(0 0 10px #fbbf24); }
+    .logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .logo-text .top {
+      font-size: 20px; font-weight: 900;
+      background: linear-gradient(180deg,#fde68a,#f59e0b);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+    .logo-text .bottom { font-size: 14px; font-weight: 700; color: #fcd34d; letter-spacing: 2px; }
+
+    .active-pill {
+      background: rgba(0,255,200,0.12);
+      border: 1.5px solid #00e0b0;
+      border-radius: 40px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #b0fff0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .active-pill .dot {
+      width: 10px; height: 10px;
+      background: #00e0b0;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #00e0b0;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:.7;transform:scale(.9)} 50%{opacity:1;transform:scale(1.2)} }
+
+    /* top summary card */
+    .summary-card {
+      background: linear-gradient(145deg,#0b1b3a,#1a2f5a,#0e1e3a);
+      border-radius: 32px;
+      padding: 22px 20px 20px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(251,191,36,0.5);
+      position: relative;
+      overflow: hidden;
+    }
+    .summary-card::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle at 70% 30%, rgba(251,191,36,0.08), transparent 60%);
+      pointer-events: none;
+    }
+    .summary-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #fcd34d;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 2;
+    }
+    .summary-amount {
+      font-size: 44px;
+      font-weight: 900;
+      background: linear-gradient(180deg,#fde68a,#f59e0b);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+      margin-top: 4px;
+      position: relative;
+      z-index: 2;
+    }
+    .summary-amount span { font-size: 22px; color: #fcd34d; -webkit-text-fill-color: #fcd34d; }
+    .summary-sub {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-top: 4px;
+      position: relative;
+      z-index: 2;
+    }
+    .summary-sub strong { color: #00e0b0; }
+
+    .summary-progress {
+      position: relative;
+      z-index: 2;
+      margin-top: 14px;
+      height: 8px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .summary-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg,#00e0b0,#fbbf24);
+      border-radius: 20px;
+      transition: width 0.6s ease;
+    }
+
+    /* day cards */
+    .days-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .day-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 14px 16px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .day-card.locked {
+      opacity: 0.6;
+    }
+
+    .day-card.unlocked {
+      border-color: rgba(251,191,36,0.5);
+      box-shadow: 0 0 20px rgba(251,191,36,0.15);
+      animation: glow 2s ease-in-out infinite;
+    }
+    @keyframes glow {
+      0%,100% { box-shadow: 0 0 20px rgba(251,191,36,0.15); }
+      50% { box-shadow: 0 0 30px rgba(251,191,36,0.35); }
+    }
+
+    .day-card.claimed {
+      background: linear-gradient(135deg, rgba(0,224,176,0.08), rgba(0,224,176,0.02));
+      border-color: rgba(0,224,176,0.35);
+      opacity: 0.9;
+    }
+
+    .day-icon {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      background: linear-gradient(145deg,#1a2f5a,#0e1e3a);
+      border: 1px solid rgba(251,191,36,0.3);
+    }
+    .day-card.claimed .day-icon {
+      background: linear-gradient(145deg, rgba(0,224,176,0.2), rgba(0,224,176,0.05));
+      border-color: rgba(0,224,176,0.4);
+    }
+
+    .day-info { flex: 1; }
+    .day-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #e2e8f0;
+      margin-bottom: 2px;
+    }
+    .day-card.claimed .day-title { color: #00e0b0; }
+
+    .day-reward {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+    .day-reward strong { color: #fcd34d; font-size: 14px; }
+    .day-card.claimed .day-reward strong { color: #00e0b0; }
+
+    .day-btn {
+      padding: 10px 18px;
+      border-radius: 30px;
+      border: none;
+      font-weight: 800;
+      font-size: 13px;
+      cursor: pointer;
+      transition: transform 0.2s;
+      min-width: 90px;
+      text-align: center;
+    }
+    .day-btn:active { transform: scale(0.95); }
+
+    .day-btn.claim {
+      background: linear-gradient(135deg,#fbbf24,#f59e0b);
+      color: #0b0f1c;
+      box-shadow: 0 0 25px rgba(251,191,36,0.6);
+      animation: btnPulse 1.5s infinite;
+    }
+    @keyframes btnPulse {
+      0%,100% { box-shadow: 0 0 25px rgba(251,191,36,0.6); }
+      50% { box-shadow: 0 0 40px rgba(251,191,36,0.9); }
+    }
+
+    .day-btn.claimed {
+      background: rgba(0,224,176,0.15);
+      color: #00e0b0;
+      border: 1px solid rgba(0,224,176,0.4);
+      cursor: default;
+    }
+
+    .day-btn.locked {
+      background: rgba(255,255,255,0.05);
+      color: #64748b;
+      cursor: not-allowed;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* milestone card */
+    .milestone-card {
+      background: linear-gradient(135deg, #fff9e8, #eef6ff);
+      border: 1px solid rgba(245,158,11,0.3);
+      border-radius: 22px;
+      padding: 18px 16px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+    .milestone-card::after {
+      content: '';
+      position: absolute;
+      inset: -60%;
+      background: linear-gradient(120deg,transparent 42%,rgba(255,255,255,0.7) 50%,transparent 58%);
+      animation: shine 4s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes shine { to { transform: translateX(35%) translateY(35%) rotate(8deg); } }
+
+    .milestone-icon {
+      width: 52px;
+      height: 52px;
+      min-width: 52px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      background: linear-gradient(135deg,#fbbf24,#f59e0b);
+      box-shadow: 0 8px 25px rgba(251,191,36,0.4);
+      position: relative;
+      z-index: 2;
+    }
+    .milestone-text { position: relative; z-index: 2; }
+    .milestone-text h4 {
+      font-size: 14px;
+      font-weight: 900;
+      color: #7c2d12;
+      margin-bottom: 3px;
+    }
+    .milestone-text p {
+      font-size: 11px;
+      color: #78716c;
+      line-height: 1.4;
+    }
+    .milestone-text p strong { color: #ea580c; }
+
+    /* info card */
+    .info-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .info-card h4 {
+      font-size: 13px;
+      font-weight: 800;
+      color: #fcd34d;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .info-card ul {
+      list-style: none;
+      padding: 0;
+    }
+    .info-card li {
+      font-size: 12px;
+      color: #94a3b8;
+      line-height: 1.6;
+      padding-left: 16px;
+      position: relative;
+    }
+    .info-card li::before {
+      content: '•';
+      position: absolute;
+      left: 4px;
+      color: #fbbf24;
+      font-weight: 900;
+    }
+
+    /* login notice */
+    .login-notice {
+      background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(239,68,68,0.05));
+      border: 1px solid rgba(251,191,36,0.3);
+      border-radius: 20px;
+      padding: 18px 16px;
+      text-align: center;
+      margin-bottom: 16px;
+      display: none;
+    }
+    .login-notice.show { display: block; }
+    .login-notice .icon { font-size: 32px; margin-bottom: 6px; }
+    .login-notice h4 { font-size: 15px; color: #fcd34d; margin-bottom: 6px; font-weight: 800; }
+    .login-notice p { font-size: 12px; color: #94a3b8; margin-bottom: 12px; line-height: 1.5; }
+    .login-notice button {
+      background: linear-gradient(135deg,#fbbf24,#f59e0b);
+      color: #0b0f1c;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 30px;
+      font-weight: 800;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    /* toast */
+    .toast {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: linear-gradient(135deg,#00e0b0,#00a080);
+      color: #fff;
+      padding: 14px 22px;
+      border-radius: 16px;
+      font-weight: 800;
+      font-size: 14px;
+      box-shadow: 0 15px 40px rgba(0,224,176,0.5);
+      z-index: 99999;
+      transition: transform 0.4s cubic-bezier(0.2,0.85,0.2,1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+    .toast.error {
+      background: linear-gradient(135deg,#ef4444,#b91c1c);
+      box-shadow: 0 15px 40px rgba(239,68,68,0.5);
+    }
+
+    /* bottom nav */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 8px 0 4px;
+    }
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      color: #64748b;
+      font-size: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .nav-item.active { color: #fcd34d; }
+    .nav-item .nav-icon { font-size: 22px; }
+    .nav-item.center { margin-top: -24px; }
+    .nav-item.center .nav-icon {
+      width: 56px; height: 56px;
+      background: linear-gradient(145deg,#fbbf24,#f59e0b);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; color: #0b0f1c;
+      border: 3px solid #0b0f1c;
+    }
+
+    @media (max-width: 400px) {
+      .summary-amount { font-size: 36px; }
+      .day-btn { padding: 8px 14px; min-width: 76px; font-size: 11px; }
+      .day-icon { width: 42px; height: 42px; min-width: 42px; font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+    <span id="toastIcon">✅</span>
+    <span id="toastMsg">Reward claimed!</span>
+  </div>
+
+  <div class="app-container">
+    <!-- header -->
+    <div class="app-header">
+      <div class="logo-group">
+        <div class="crown-icon">👑</div>
+        <div class="logo-text">
+          <div class="top">₹1 CRORE</div>
+          <div class="bottom">GRAND</div>
+        </div>
+      </div>
+      <div class="active-pill">
+        <span class="dot"></span> Rewards
+      </div>
+    </div>
+
+    <!-- login notice -->
+    <div class="login-notice" id="loginNotice">
+      <div class="icon">🔐</div>
+      <h4>Login Required</h4>
+      <p>Daily rewards claim karne ke liye pehle login karo.</p>
+      <button onclick="window.location.href='index.html'">Go to Home</button>
+    </div>
+
+    <!-- summary -->
+    <div class="summary-card">
+      <div class="summary-title">Total Rewards Earned</div>
+      <div class="summary-amount">₹<span id="totalEarned">0</span></div>
+      <div class="summary-sub">Day <strong id="currentDay">1</strong> of 7 • <strong id="remainingAmount">₹1000</strong> remaining</div>
+      <div class="summary-progress">
+        <div class="summary-progress-fill" id="summaryProgress"></div>
+      </div>
+    </div>
+
+    <!-- day list -->
+    <div class="days-list" id="daysList"></div>
+
+    <!-- milestone -->
+    <div class="milestone-card">
+      <div class="milestone-icon">🏆</div>
+      <div class="milestone-text">
+        <h4>7-Day Milestone: ₹1000 Complete!</h4>
+        <p>All 7 days claim karo aur <strong>₹1000</strong> ka full reward unlock karo. Extra bonus + special badge milega!</p>
+      </div>
+    </div>
+
+    <!-- info -->
+    <div class="info-card">
+      <h4>ℹ️ Reward Rules</h4>
+      <ul>
+        <li>Har din ek baar reward claim kar sakte ho</li>
+        <li>Ek din miss karne par next day se continue hoga</li>
+        <li>Reward aapke Wallet me automatically add ho jayega</li>
+        <li>7 din poore karne par ₹1000 complete hoga</li>
+        <li>Fake accounts par reward nahi milega</li>
+      </ul>
+    </div>
+
+    <!-- bottom nav -->
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="window.location.href='index.html'">
+        <div class="nav-icon">🏠</div>
+        <div class="nav-label">Home</div>
+      </div>
+      <div class="nav-item" onclick="window.location.href='index.html'">
+        <div class="nav-icon">👤</div>
+        <div class="nav-label">My Profile</div>
+      </div>
+      <div class="nav-item center" onclick="window.location.href='index.html'">
+        <div class="nav-icon">👑</div>
+        <div class="nav-label">Join Now</div>
+      </div>
+      <div class="nav-item" onclick="window.location.href='wallet.html'">
+        <div class="nav-icon">👛</div>
+        <div class="nav-label">Wallet</div>
+      </div>
+      <div class="nav-item active">
+        <div class="nav-icon">🎁</div>
+        <div class="nav-label">Rewards</div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getDatabase, ref, get, update, increment, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCZB16fbMjPUxPlMdJdv0LGSW11YE8--2g",
+      authDomain: "rechargeapp-eec16.firebaseapp.com",
+      databaseURL: "https://rechargeapp-eec16-default-rtdb.firebaseio.com",
+      projectId: "rechargeapp-eec16",
+      storageBucket: "rechargeapp-eec16.firebasestorage.app",
+      messagingSenderId: "625226706534",
+      appId: "1:625226706534:web:1192e6b6a47641a48987a7"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    /* ==========================================
+       REWARD CONFIG (Total = ₹1000)
+       ========================================== */
+    const REWARDS = [
+      { day: 1, amount: 50,  icon: "🎁", title: "Welcome Bonus" },
+      { day: 2, amount: 75,  icon: "💎", title: "Daily Reward" },
+      { day: 3, amount: 100, icon: "🔥", title: "Streak Bonus" },
+      { day: 4, amount: 125, icon: "⭐", title: "Loyalty Reward" },
+      { day: 5, amount: 150, icon: "💰", title: "Big Bonus" },
+      { day: 6, amount: 200, icon: "🏅", title: "Super Streak" },
+      { day: 7, amount: 300, icon: "🏆", title: "Mega Milestone" }
+    ];
+    const TOTAL_REWARD = 1000;
+
+    /* ==========================================
+       STATE
+       ========================================== */
+    let currentUser = null;
+    let userRewards = {
+      claimedDays: [],
+      totalEarned: 0,
+      lastClaimDate: null,
+      dayStreak: 0
+    };
+
+    /* ==========================================
+       AUTH CHECK
+       ========================================== */
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        currentUser = user;
+        document.getElementById("loginNotice").classList.remove("show");
+        await loadUserRewards();
+      } else {
+        currentUser = null;
+        document.getElementById("loginNotice").classList.add("show");
+        // Show demo locked state
+        userRewards = { claimedDays: [], totalEarned: 0, lastClaimDate: null, dayStreak: 0 };
+        renderDays();
+        updateSummary();
+      }
+    });
+
+    /* ==========================================
+       LOAD USER REWARDS
+       ========================================== */
+    async function loadUserRewards() {
+      try {
+        const snap = await get(ref(db, "rewards/" + currentUser.uid));
+        if (snap.exists()) {
+          const data = snap.val();
+          userRewards.claimedDays = data.claimedDays || [];
+          userRewards.totalEarned = Number(data.totalEarned || 0);
+          userRewards.lastClaimDate = data.lastClaimDate || null;
+          userRewards.dayStreak = Number(data.dayStreak || 0);
+        } else {
+          // Initialize new
+          userRewards = { claimedDays: [], totalEarned: 0, lastClaimDate: null, dayStreak: 0 };
+          await update(ref(db, "rewards/" + currentUser.uid), userRewards);
+        }
+        renderDays();
+        updateSummary();
+      } catch (err) {
+        console.error("Load rewards error:", err);
+        showToast("Data load failed", "error");
+      }
+    }
+
+    /* ==========================================
+       RENDER DAY CARDS
+       ========================================== */
+    function renderDays() {
+      const container = document.getElementById("daysList");
+      container.innerHTML = REWARDS.map(r => {
+        const isClaimed = userRewards.claimedDays.includes(r.day);
+        const isUnlocked = !isClaimed && (r.day === 1 || userRewards.claimedDays.includes(r.day - 1));
+        const isLocked = !isClaimed && !isUnlocked;
+
+        let cardClass = "day-card";
+        let btnClass = "day-btn";
+        let btnText = "";
+
+        if (isClaimed) {
+          cardClass += " claimed";
+          btnClass += " claimed";
+          btnText = "✓ Claimed";
+        } else if (isUnlocked) {
+          cardClass += " unlocked";
+          btnClass += " claim";
+          btnText = "Claim ₹" + r.amount;
+        } else {
+          cardClass += " locked";
+          btnClass += " locked";
+          btnText = "🔒 Locked";
+        }
+
+        return `
+          <div class="${cardClass}">
+            <div class="day-icon">${r.icon}</div>
+            <div class="day-info">
+              <div class="day-title">Day ${r.day} • ${r.title}</div>
+              <div class="day-reward">Reward: <strong>₹${r.amount}</strong></div>
+            </div>
+            <button class="${btnClass}" ${isClaimed || isLocked ? 'disabled' : ''} onclick="claimDay(${r.day})">
+              ${btnText}
+            </button>
+          </div>
+        `;
+      }).join("");
+    }
+
+    /* ==========================================
+       UPDATE SUMMARY
+       ========================================== */
+    function updateSummary() {
+      const earned = userRewards.totalEarned || 0;
+      const remaining = Math.max(0, TOTAL_REWARD - earned);
+      const pct = (earned / TOTAL_REWARD) * 100;
+      const currentDay = Math.min(userRewards.claimedDays.length + 1, 7);
+
+      document.getElementById("totalEarned").textContent = earned;
+      document.getElementById("currentDay").textContent = currentDay;
+      document.getElementById("remainingAmount").textContent = "₹" + remaining;
+      document.getElementById("summaryProgress").style.width = pct + "%";
+    }
+
+    /* ==========================================
+       CLAIM REWARD
+       ========================================== */
+    window.claimDay = async function (day) {
+      if (!currentUser) {
+        showToast("Please login first!", "error");
+        return;
+      }
+
+      // Validate
+      const reward = REWARDS.find(r => r.day === day);
+      if (!reward) return;
+
+      if (userRewards.claimedDays.includes(day)) {
+        showToast("Already claimed!", "error");
+        return;
+      }
+
+      // Check if day is unlocked
+      const isUnlocked = day === 1 || userRewards.claimedDays.includes(day - 1);
+      if (!isUnlocked) {
+        showToast("Complete previous day first!", "error");
+        return;
+      }
+
+      // Check if already claimed today
+      const today = new Date().toDateString();
+      if (userRewards.lastClaimDate && new Date(userRewards.lastClaimDate).toDateString() === today) {
+        showToast("Aaj ka reward already claim ho chuka hai!", "error");
+        return;
+      }
+
+      try {
+        const newClaimedDays = [...userRewards.claimedDays, day];
+        const newTotal = userRewards.totalEarned + reward.amount;
+
+        // Update rewards node
+        await update(ref(db, "rewards/" + currentUser.uid), {
+          claimedDays: newClaimedDays,
+          totalEarned: newTotal,
+          lastClaimDate: new Date().toISOString(),
+          dayStreak: increment(1)
+        });
+
+        // Update user's wallet balance
+        const walletRef = ref(db, "wallets/" + currentUser.uid);
+        const walletSnap = await get(walletRef);
+        if (walletSnap.exists()) {
+          await update(walletRef, {
+            balance: increment(reward.amount),
+            totalEarned: increment(reward.amount)
+          });
+        } else {
+          await update(walletRef, {
+            balance: reward.amount,
+            totalEarned: reward.amount,
+            totalWithdrawn: 0,
+            createdAt: new Date().toISOString()
+          });
+        }
+
+        // Add transaction
+        const txRef = ref(db, "wallets/" + currentUser.uid + "/transactions");
+        const newTxKey = "day" + day + "_" + Date.now();
+        await update(ref(db, "wallets/" + currentUser.uid + "/transactions/" + newTxKey), {
+          type: "credit",
+          title: "Day " + day + " Reward",
+          amount: reward.amount,
+          date: new Date().toISOString()
+        });
+
+        // Update local state
+        userRewards.claimedDays = newClaimedDays;
+        userRewards.totalEarned = newTotal;
+        userRewards.lastClaimDate = new Date().toISOString();
+        userRewards.dayStreak++;
+
+        renderDays();
+        updateSummary();
+
+        // Show success
+        showToast("🎉 ₹" + reward.amount + " claimed successfully!");
+
+        // Check if all 7 days complete
+        if (newClaimedDays.length === 7) {
+          setTimeout(() => {
+            showToast("🏆 Congratulations! ₹1000 complete!", "success");
+          }, 1500);
+        }
+
+      } catch (err) {
+        console.error("Claim error:", err);
+        showToast("Claim failed. Try again.", "error");
+      }
+    };
+
+    /* ==========================================
+       TOAST
+       ========================================== */
+    let toastTimer;
+    function showToast(msg, type = "success") {
+      const toast = document.getElementById("toast");
+      const icon = document.getElementById("toastIcon");
+      const msgEl = document.getElementById("toastMsg");
+
+      icon.textContent = type === "error" ? "❌" : "✅";
+      msgEl.textContent = msg;
+      toast.className = "toast " + (type === "error" ? "error" : "") + " show";
+
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 3000);
+    }
+
+    /* ==========================================
+       INITIAL RENDER
+       ========================================== */
+    renderDays();
+    updateSummary();
+
+  </script>
+</body>
+</html>
